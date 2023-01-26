@@ -1,18 +1,17 @@
-import './globals.css'
+export default function HomeLayout({children}: {children: React.ReactNode}) {
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
   return (
     <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
-      <body>{children}</body>
-    </html>
-  )
+      <head>
+        <meta charSet="UTF-8"/>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>MyPortfolio</title>
+      </head>
+      <body>
+        <h1>ROOT</h1>
+        <br/>
+        {children}
+      </body>
+    </html>)
 }
