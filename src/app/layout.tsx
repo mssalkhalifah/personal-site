@@ -13,7 +13,9 @@ export default function RootLayout({
         <Scene />
         <div className="absolute m-0 top-0 left-0 w-full">
           <Navbar />
-          <div className="flex flex-col w-fit mt-5 ml-10">{children}</div>
+          <div className="flex flex-col place-items-center mt-5 mx-4 mb-4 lg:mx-0 lg:mb-0 lg:ml-10 lg:max-w-screen-md">
+            {children}
+          </div>
         </div>
       </body>
     </html>

@@ -3,7 +3,7 @@ import profilePic from "../../public/profile.jpg";
 
 export default function Profile() {
   return (
-    <div className="flex flex-row place-items-center">
+    <div className="flex flex-col md:flex-row place-items-center">
       <div>
         <Image
           src={profilePic}
@@ -13,13 +13,13 @@ export default function Profile() {
           className="rounded-lg shadow-md"
         />
       </div>
-      <div className="ml-4">
-        <div className="flex flex-col">
-          <h1 className="font-extrabold text-2xl">
+      <div className="md:ml-4">
+        <div className="flex flex-col text-center md:text-start">
+          <h1 className="font-extrabold text-3xl">
             Mohammad Sulaiman Saleh Alkhalifah
           </h1>
           <p className="text-lg">Bachelor degree of computer science</p>
-          <p className="bg-dark-blue p-2 mt-2 w-fit text-white rounded-lg shadow-md">
+          <p className="bg-dark-blue p-2 mt-2 text-white rounded-lg shadow-md md:w-fit">
             Currently working at{" "}
             <a
               className="text-red hover:underline hover:decoration-2 hover:decoration-white"
