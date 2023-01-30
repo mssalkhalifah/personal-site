@@ -1,3 +1,9 @@
+import Profile from "./profile";
+
 export default function Page() {
-  return <h1>Hello!</h1>
+  return (
+    <>
+      <Profile />
+    </>
+  );
 }
