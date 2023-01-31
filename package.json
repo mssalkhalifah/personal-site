@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "test": "echo \" Not implemented yet\""
   },
   "dependencies": {
     "@next/font": "13.1.5",
