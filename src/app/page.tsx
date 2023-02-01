@@ -10,10 +10,10 @@ export default function Page() {
   return (
     <>
       <Profile />
-      <p className="mt-4 text-3xl ">
-        A bachelor of computer science graduate at Imam Mohammad Ibn Saud
-        Islamic University with first-class honor. A Saudi. And like developing
-        video games and web apps as a hobby.
+      <p className="text-[0] invisible lg:visible lg:text-3xl lg:mt-4">
+        A bachelor of computer science at Imam Mohammad Ibn Saud Islamic
+        University with first-class honor. A Saudi. And like developing video
+        games and web apps as a hobby.
       </p>
     </>
     // <Container className="mt-5" title="What I do" content={whatIDo} />

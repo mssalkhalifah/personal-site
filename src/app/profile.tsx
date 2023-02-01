@@ -3,7 +3,7 @@ import profilePic from "../../public/profile.jpg";
 
 export default function Profile() {
   return (
-    <div className="flex flex-col md:flex-row place-items-center">
+    <div className="flex flex-col md:flex-row place-items-center pointer-events-auto">
       <div>
         <Image
           src={profilePic}
