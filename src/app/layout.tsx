@@ -23,10 +23,5 @@ export default function RootLayout({
         </div>
       </body>
     </html>
-    // <div className="flex place-items-center w-3/4 h-full place-self-center">
-    //   <div className="flex flex-col place-items-center mt-5 mx-4 mb-4 lg:mx-0 lg:mb-0 lg:ml-10 lg:max-w-screen-md">
-    //     {children}
-    //   </div>
-    // </div>
   );
 }
