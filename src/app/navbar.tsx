@@ -33,7 +33,7 @@ function NavButton({
     <button
       onMouseOver={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
-      className={`p-2 bg-white rounded-lg w-24 shadow-md ${className}`}
+      className={`w-24 rounded-lg bg-white p-2 shadow-md ${className}`}
     >
       <Link href={url ? url : ""}>
         <div className="flex flex-row place-items-center justify-center">
@@ -52,7 +52,7 @@ function DarkModeToggle() {
 
   return (
     <button
-      className="p-2 bg-white rounded-md shadow-md"
+      className="rounded-md bg-white p-2 shadow-md"
       onClick={() => setToggle(!toggle)}
     >
       {toggle ? <FaSun /> : <FaMoon />}
@@ -62,7 +62,7 @@ function DarkModeToggle() {
 
 export default function Navbar() {
   return (
-    <div className="flex w-full mt-4 justify-between place-items-center pointer-events-auto">
+    <div className="pointer-events-auto mt-4 flex w-full place-items-center justify-between">
       <div>
         <NavButton
           title="Home"
