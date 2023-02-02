@@ -11,9 +11,9 @@ export default function Container({
 }: ContainerProps) {
   return (
     <div
-      className={`flex flex-col p-2 rounded-lg shadow-md bg-white ${className}`}
+      className={`flex flex-col rounded-lg bg-white p-2 shadow-md ${className}`}
     >
-      <h1 className="font-bold underline decoration-2 text-2xl">{title}</h1>
+      <h1 className="text-2xl font-bold underline decoration-2">{title}</h1>
       <p className="indent-4">{content}</p>
     </div>
   );
