@@ -9,13 +9,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex m-0 top-0 left-0 w-screen h-screen font-primary">
+      <body className="top-0 left-0 m-0 flex h-screen w-screen font-primary">
         <Scene />
-        <div className="absolute flex w-full h-full justify-center pointer-events-none">
-          <div className="flex flex-col m-0 top-0 left-0 max-w-screen-2xl h-full">
+        <div className="pointer-events-none absolute flex h-full w-full justify-center">
+          <div className="top-0 left-0 m-0 flex h-full max-w-screen-2xl flex-col">
             <Navbar />
-            <div className="flex place-self-center h-full lg:place-items-center">
-              <div className="flex flex-col w-full m-4 2xl:m-0 xl:ml-4 xl:w-1/2">
+            <div className="flex h-full place-self-center lg:place-items-center">
+              <div className="m-4 flex w-full flex-col xl:ml-4 xl:w-1/2 2xl:m-0">
                 {children}
               </div>
             </div>

@@ -3,7 +3,7 @@ import profilePic from "../../public/profile.jpg";
 
 export default function Profile() {
   return (
-    <div className="flex flex-col md:flex-row place-items-center pointer-events-auto">
+    <div className="pointer-events-auto flex flex-col place-items-center md:flex-row">
       <div>
         <Image
           src={profilePic}
@@ -15,15 +15,15 @@ export default function Profile() {
       </div>
       <div className="md:ml-4">
         <div className="flex flex-col text-center md:text-start">
-          <h1 className="font-black text-5xl">
+          <h1 className="text-5xl font-black">
             Hi! I&apos;m
             <br /> Mohammad <br /> Alkhalifah
           </h1>
           <p className="text-lg">A Software Developer</p>
-          <p className="bg-black p-2 text-white rounded-lg shadow-md md:w-fit">
+          <p className="rounded-lg bg-black p-2 text-white shadow-md md:w-fit">
             Currently working at{" "}
             <a
-              className="text-red hover:underline hover:decoration-2 hover:decoration-white"
+              className="text-red hover:underline hover:decoration-white hover:decoration-2"
               href="https://www.mis.com.sa/"
               target="_blank"
               rel="noopener noreferrer"
