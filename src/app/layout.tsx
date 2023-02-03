@@ -8,8 +8,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="top-0 left-0 m-0 flex h-screen w-screen font-primary">
+    <html className="dark" lang="en">
+      <body className="top-0 left-0 m-0 flex h-screen w-screen bg-white font-primary text-black transition dark:bg-darker-blue dark:text-white">
         <Scene />
         <div className="pointer-events-none absolute flex h-full w-full justify-center">
           <div className="top-0 left-0 m-0 flex h-full max-w-screen-2xl flex-col">
