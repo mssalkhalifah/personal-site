@@ -52,19 +52,27 @@ function DarkModeToggle() {
   useEffect(() => {
     setToggle(localStorage.theme !== "dark");
 
-    if (toggle) {
-      document.documentElement.classList.remove("dark");
-      localStorage.theme = "light";
-    } else {
+    if (localStorage.theme === "dark") {
       document.documentElement.classList.add("dark");
-      localStorage.theme = "dark";
+    } else {
+      document.documentElement.classList.remove("dark");
     }
-  }, [toggle]);
+  }, []);
 
   return (
     <button
       className="rounded-md bg-white p-3 shadow-md transition dark:bg-dark-blue"
-      onClick={() => setToggle(!toggle)}
+      onClick={() => {
+        if (!toggle) {
+          document.documentElement.classList.remove("dark");
+          localStorage.theme = "light";
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.theme = "dark";
+        }
+
+        setToggle(!toggle);
+      }}
     >
       {toggle ? <FaSun /> : <FaMoon />}
     </button>
