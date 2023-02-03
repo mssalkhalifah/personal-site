@@ -10,7 +10,6 @@ import {
   FaSun,
   FaMoon,
 } from "react-icons/fa";
-import { Url } from "url";
 
 interface NavButton {
   title?: string;
@@ -33,7 +32,7 @@ function NavButton({
     <button
       onMouseOver={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
-      className={`w-24 rounded-lg bg-white p-2 shadow-md ${className}`}
+      className={`w-24 rounded-lg bg-white p-2 shadow-md dark:bg-dark-blue ${className}`}
     >
       <Link href={url ? url : ""}>
         <div className="flex flex-row place-items-center justify-center">
@@ -52,10 +51,17 @@ function DarkModeToggle() {
 
   return (
     <button
-      className="rounded-md bg-white p-2 shadow-md"
-      onClick={() => setToggle(!toggle)}
+      className="rounded-md bg-white p-3 shadow-md dark:bg-dark-blue"
+      onClick={() => {
+        setToggle(!toggle);
+        if (toggle) {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+      }}
     >
-      {toggle ? <FaSun /> : <FaMoon />}
+      {toggle ? <FaMoon /> : <FaSun />}
     </button>
   );
 }
