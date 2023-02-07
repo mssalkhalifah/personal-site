@@ -15,7 +15,7 @@ export default function RootLayout({
         className="top-0 left-0 m-0 flex h-screen w-screen overflow-hidden border-[80px] border-solid bg-black text-[#ffffff] transition"
       >
         <div id="monitor" className="relative flex w-full flex-row">
-          <div id="bazel">
+          <div id="bazel" className="w-1/2">
             <div id="crt" className="crt">
               <div className="scanline"></div>
               <div className="m-5 font-terminal uppercase">{children}</div>

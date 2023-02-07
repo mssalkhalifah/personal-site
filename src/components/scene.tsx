@@ -15,7 +15,7 @@ export default function Scene() {
   const isDebug = true;
 
   return (
-    <Canvas style={{ width: "100%", height: "100%" }}>
+    <Canvas style={{ width: "50%", height: "100%" }}>
       <PostProcess />
       <Suspense fallback={"Loading..."}>
         <ambientLight />

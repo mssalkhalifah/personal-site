@@ -34,7 +34,7 @@ export function Balls(props: JSX.IntrinsicElements["group"]) {
     console.log(clip);
 
     clips.forEach((clip) => {
-      mixer.clipAction(clip).play();
+      // mixer.clipAction(clip).play();
     });
   });
 
