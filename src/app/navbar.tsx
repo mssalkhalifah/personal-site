@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   FaFolder,
   FaFolderOpen,
@@ -10,7 +10,6 @@ import {
   FaSun,
   FaMoon,
 } from "react-icons/fa";
-import { Url } from "url";
 
 interface NavButton {
   title?: string;
@@ -33,7 +32,7 @@ function NavButton({
     <button
       onMouseOver={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
-      className={`w-24 rounded-lg bg-white p-2 shadow-md ${className}`}
+      className={`w-24 border-4 border-solid border-white p-2 transition ${className} hover:bg-white hover:text-black`}
     >
       <Link href={url ? url : ""}>
         <div className="flex flex-row place-items-center justify-center">
@@ -50,10 +49,34 @@ function NavButton({
 function DarkModeToggle() {
   const [toggle, setToggle] = useState(false);
 
+  useEffect(() => {
+    setToggle(localStorage.theme !== "dark");
+
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
   return (
     <button
-      className="rounded-md bg-white p-2 shadow-md"
-      onClick={() => setToggle(!toggle)}
+      className="rounded-md bg-white p-3 shadow-md transition dark:bg-dark-blue"
+      onClick={() => {
+        if (!toggle) {
+          document.documentElement.classList.remove("dark");
+          localStorage.theme = "light";
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.theme = "dark";
+        }
+
+        setToggle(!toggle);
+      }}
     >
       {toggle ? <FaSun /> : <FaMoon />}
     </button>
@@ -62,7 +85,7 @@ function DarkModeToggle() {
 
 export default function Navbar() {
   return (
-    <div className="pointer-events-auto mt-4 flex w-full place-items-center justify-between">
+    <div className="mt-4 flex w-full place-items-center justify-center">
       <div>
         <NavButton
           title="Home"
@@ -72,7 +95,7 @@ export default function Navbar() {
         />
         <NavButton
           title="Projects"
-          className="mx-4"
+          className="mx-12"
           iconTypeOpen={<FaFolderOpen />}
           iconTypeClose={<FaFolder />}
           url="/projects"
@@ -83,9 +106,6 @@ export default function Navbar() {
           iconTypeClose={<FaBlogger />}
           url="/blogs"
         />
-      </div>
-      <div>
-        <DarkModeToggle />
       </div>
     </div>
   );
