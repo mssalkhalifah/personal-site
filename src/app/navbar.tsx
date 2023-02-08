@@ -32,7 +32,7 @@ function NavButton({
     <button
       onMouseOver={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
-      className={`w-24 rounded-lg bg-white p-2 shadow-md transition dark:bg-dark-blue ${className}`}
+      className={`w-24 border-4 border-solid border-white p-2 transition ${className} hover:bg-white hover:text-black`}
     >
       <Link href={url ? url : ""}>
         <div className="flex flex-row place-items-center justify-center">
@@ -85,7 +85,7 @@ function DarkModeToggle() {
 
 export default function Navbar() {
   return (
-    <div className="pointer-events-auto mt-4 flex w-full place-items-center justify-between">
+    <div className="mt-4 flex w-full place-items-center justify-center">
       <div>
         <NavButton
           title="Home"
@@ -95,7 +95,7 @@ export default function Navbar() {
         />
         <NavButton
           title="Projects"
-          className="mx-4"
+          className="mx-12"
           iconTypeOpen={<FaFolderOpen />}
           iconTypeClose={<FaFolder />}
           url="/projects"
@@ -106,9 +106,6 @@ export default function Navbar() {
           iconTypeClose={<FaBlogger />}
           url="/blogs"
         />
-      </div>
-      <div>
-        <DarkModeToggle />
       </div>
     </div>
   );
