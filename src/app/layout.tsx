@@ -20,25 +20,16 @@ export default function RootLayout({
             className="flex h-full w-1/2 flex-col place-items-center"
           >
             <Navbar />
-            <div id="crt" className="crt flex h-full place-items-center">
+            <div id="crt" className="crt flex h-full w-full place-items-center">
               <div className="scanline"></div>
-              <div className="m-5 font-terminal uppercase">{children}</div>
+              <div className="m-5 flex w-full justify-center font-terminal uppercase">
+                {children}
+              </div>
             </div>
           </div>
           <Scene />
         </div>
       </body>
     </html>
-    // <Scene />
-    // <div className="pointer-events-none absolute flex h-full w-full justify-center">
-    //   <div className="top-0 left-0 m-0 flex h-full max-w-screen-2xl flex-col">
-    //     <Navbar />
-    //     <div className="flex h-full place-self-center lg:place-items-center">
-    //       <div className="m-4 flex w-full flex-col xl:ml-4 xl:w-1/2 2xl:m-0">
-    //         {children}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
