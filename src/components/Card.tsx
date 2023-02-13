@@ -8,7 +8,7 @@ interface CardProps {
 
 export default function Card({ title, date }: CardProps) {
   return (
-    <div className="flex flex-col">
+    <div className="m-2 flex flex-col">
       <Image src={placeholder} width={320} height={180} alt={""} />
       <div className="mt-1 flex flex-col text-center">
         <h3 className="text-2xl font-bold">{title || "Title"}</h3>

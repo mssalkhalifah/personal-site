@@ -85,7 +85,7 @@ function DarkModeToggle() {
 
 export default function Navbar() {
   return (
-    <div className="mt-4 flex w-full place-items-center justify-center">
+    <div className="absolute top-0 z-[5] mt-4 flex w-full justify-center">
       <div>
         <NavButton
           title="Home"

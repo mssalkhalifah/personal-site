@@ -15,11 +15,11 @@ export default function RootLayout({
         className="top-0 left-0 m-0 flex h-screen w-screen overflow-hidden border-[80px] border-solid bg-black text-[#ffffff] transition"
       >
         <div id="monitor" className="relative flex w-full flex-row">
+          <Navbar />
           <div
             id="bazel"
             className="flex h-full w-1/2 flex-col place-items-center"
           >
-            <Navbar />
             <div id="crt" className="crt flex h-full w-full place-items-center">
               <div className="scanline"></div>
               <div className="m-5 flex w-full justify-center font-terminal uppercase">
@@ -27,7 +27,9 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <Scene />
+          <div className="h-full w-1/2">
+            <Scene />
+          </div>
         </div>
       </body>
     </html>
