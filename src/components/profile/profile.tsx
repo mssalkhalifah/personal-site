@@ -1,5 +1,3 @@
-import Image from "next/image";
-import profilePic from "../../../public/profile.jpg";
 import Name from "./name";
 
 export default function Profile() {

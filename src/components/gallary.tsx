@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Card from "./Card";
 
 interface Project {
@@ -14,46 +14,117 @@ interface GallaryProps {
 }
 
 export default function Gallary({ projects }: GallaryProps) {
-  const [page, setPage] = useState(0);
-  const content: React.ReactNode[] = [];
+  let index = 0;
+  const refs = useRef<HTMLDivElement[]>([]);
+  const parentRef = useRef<HTMLDivElement>(null);
+  const [isFocus, setFocus] = useState<boolean[]>(
+    Array(projects.length).fill(false)
+  );
+  const observer = useRef<IntersectionObserver>(null);
+  const addNode = useCallback((node: HTMLDivElement) => {
+    refs.current.push(node);
+    const lastPos = refs.current.length - 1;
+    refs.current[lastPos].id = `${lastPos}`;
+  }, []);
 
-  for (let i = 0; i < projects.length; i++) {
-    content.push(<Card title={projects[i].title} />);
-  }
-
-  const setNextPage = () => {
-    if (page === content.length - 1) {
-      setPage(0);
-      return;
+  const handler = (entries: IntersectionObserverEntry[]) => {
+    for (const entry of entries) {
+      if (entry.intersectionRatio >= 1) {
+        const targetIndex = Number(entry.target.id);
+        let newFocusList = [...isFocus];
+        newFocusList.splice(targetIndex, 1, true);
+        setFocus(newFocusList);
+      }
     }
-
-    setPage(page + 1);
   };
 
-  const setPrevPage = () => {
-    if (page <= 0) {
-      setPage(content.length - 1);
-      return;
+  const getObserver = (
+    ref: React.MutableRefObject<IntersectionObserver | null>
+  ) => {
+    let observer = ref.current;
+
+    if (observer !== null) {
+      return observer;
     }
 
-    setPage(page - 1);
+    let newObserver = new IntersectionObserver(handler, {
+      root: parentRef.current,
+      rootMargin: "0% -20% 0% -20%",
+      threshold: 1.0,
+    });
+
+    ref.current = newObserver;
+
+    return newObserver;
   };
+
+  useEffect(() => {
+    if (observer.current) {
+      observer.current.disconnect();
+    }
+
+    const newObserver = getObserver(observer);
+
+    for (const node of refs.current) {
+      newObserver.observe(node);
+    }
+
+    if (parentRef.current) {
+      const middleItem = refs.current[Math.ceil(refs.current.length / 2)];
+      parentRef.current.scrollBy(middleItem.offsetWidth, 0);
+    }
+
+    return () => newObserver.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col">
-      {content[page]}
-      <div className="flex w-full place-items-center justify-evenly">
+      <div
+        ref={parentRef}
+        id="slider"
+        className="flex max-w-screen-lg snap-x overflow-x-scroll px-20"
+      >
+        <div className="invisible min-w-fit">
+          <Card />
+        </div>
+        {projects.map((project) => {
+          return (
+            <div
+              className="min-w-fit snap-center"
+              ref={addNode}
+              key={project.title}
+            >
+              <Card isFocus={isFocus[index++]} title={project.title} />
+            </div>
+          );
+        })}
+        <div className="invisible min-w-fit">
+          <Card />
+        </div>
+      </div>
+      <div className="flex justify-center">
         <button
-          className="border-2 border-white bg-white p-1 text-2xl text-black hover:bg-black hover:text-white"
-          onClick={() => setPrevPage()}
+          onClick={() => {
+            parentRef.current?.scrollBy({
+              left: -100,
+              behavior: "smooth",
+            });
+          }}
+          className="my-1 mx-3 rounded-md bg-yellow-400 py-1 px-2 text-zinc-900"
         >
-          Prev Page
+          Prev
         </button>
         <button
-          className="border-2 border-white bg-white p-1 text-2xl text-black hover:bg-black hover:text-white"
-          onClick={() => setNextPage()}
+          onClick={() => {
+            parentRef.current?.scrollBy({
+              left: 100,
+              behavior: "smooth",
+            });
+          }}
+          className="my-1 mx-3 rounded-md bg-yellow-400 py-1 px-2 text-zinc-900"
         >
-          Next Page
+          Next
         </button>
       </div>
     </div>

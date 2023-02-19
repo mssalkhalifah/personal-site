@@ -34,12 +34,16 @@ export function Balls(props: JSX.IntrinsicElements["group"]) {
     console.log(clip);
 
     clips.forEach((clip) => {
-      // mixer.clipAction(clip).play();
+      //mixer.clipAction(clip).play();
     });
   });
 
+  let speed = 0;
   useFrame((_, delta) => {
     mixer.update(delta);
+    let yPos = 0.5 * Math.sin(0.1 * speed);
+    group.current.position.y = yPos;
+    speed += 0.1;
   });
 
   return (
