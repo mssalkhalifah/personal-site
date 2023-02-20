@@ -13,6 +13,25 @@ interface GallaryProps {
   projects: Project[];
 }
 
+const move = (
+  parentDiv: HTMLDivElement | null,
+  direction: number,
+  listSize: number,
+  currIndex: number
+) => {
+  if (parentDiv) {
+    if (
+      (currIndex === 0 && direction < 0) ||
+      (currIndex === listSize - 1 && direction > 0)
+    )
+      return;
+    parentDiv.scrollBy({
+      left: 200 * direction,
+      behavior: "smooth",
+    });
+  }
+};
+
 export default function Gallary({ projects }: GallaryProps) {
   let index = 0;
   const refs = useRef<HTMLDivElement[]>([]);
@@ -20,11 +39,14 @@ export default function Gallary({ projects }: GallaryProps) {
   const [isFocus, setFocus] = useState<boolean[]>(
     Array(projects.length).fill(false)
   );
+  const [currIndex, setCurrIndex] = useState<number>(0);
   const observer = useRef<IntersectionObserver>(null);
   const addNode = useCallback((node: HTMLDivElement) => {
     refs.current.push(node);
     const lastPos = refs.current.length - 1;
-    refs.current[lastPos].id = `${lastPos}`;
+    if (refs.current) {
+      refs.current[lastPos].id = `${lastPos}`;
+    }
   }, []);
 
   const handler = (entries: IntersectionObserverEntry[]) => {
@@ -33,6 +55,7 @@ export default function Gallary({ projects }: GallaryProps) {
         const targetIndex = Number(entry.target.id);
         let newFocusList = [...isFocus];
         newFocusList.splice(targetIndex, 1, true);
+        setCurrIndex(targetIndex);
         setFocus(newFocusList);
       }
     }
@@ -41,15 +64,15 @@ export default function Gallary({ projects }: GallaryProps) {
   const getObserver = (
     ref: React.MutableRefObject<IntersectionObserver | null>
   ) => {
-    let observer = ref.current;
+    const observer = ref.current;
 
     if (observer !== null) {
       return observer;
     }
 
-    let newObserver = new IntersectionObserver(handler, {
+    const newObserver = new IntersectionObserver(handler, {
       root: parentRef.current,
-      rootMargin: "0% -20% 0% -20%",
+      rootMargin: "0% -25% 0% -25%",
       threshold: 1.0,
     });
 
@@ -83,7 +106,7 @@ export default function Gallary({ projects }: GallaryProps) {
       <div
         ref={parentRef}
         id="slider"
-        className="flex max-w-screen-lg snap-x overflow-x-scroll px-20"
+        className="scrollbar-hide flex max-w-[1104px] snap-x overflow-x-scroll"
       >
         <div className="invisible min-w-fit">
           <Card />
@@ -93,7 +116,7 @@ export default function Gallary({ projects }: GallaryProps) {
             <div
               className="min-w-fit snap-center"
               ref={addNode}
-              key={project.title}
+              key={project.title! + index}
             >
               <Card isFocus={isFocus[index++]} title={project.title} />
             </div>
@@ -105,23 +128,17 @@ export default function Gallary({ projects }: GallaryProps) {
       </div>
       <div className="flex justify-center">
         <button
-          onClick={() => {
-            parentRef.current?.scrollBy({
-              left: -100,
-              behavior: "smooth",
-            });
-          }}
+          onClick={() =>
+            move(parentRef.current, -1, refs.current.length, currIndex)
+          }
           className="my-1 mx-3 rounded-md bg-yellow-400 py-1 px-2 text-zinc-900"
         >
           Prev
         </button>
         <button
-          onClick={() => {
-            parentRef.current?.scrollBy({
-              left: 100,
-              behavior: "smooth",
-            });
-          }}
+          onClick={() =>
+            move(parentRef.current, 1, refs.current.length, currIndex)
+          }
           className="my-1 mx-3 rounded-md bg-yellow-400 py-1 px-2 text-zinc-900"
         >
           Next

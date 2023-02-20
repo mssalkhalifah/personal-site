@@ -9,7 +9,7 @@ import CameraDebug from "./three/cameraDebug";
 import PostProcess from "./three/postProcessing";
 
 export default function Scene() {
-  const isDebug = true;
+  const isDebug = false;
 
   return (
     <Canvas>
