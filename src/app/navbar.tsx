@@ -28,7 +28,7 @@ function NavButton({
       onMouseOver={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
       onClick={onClick && (() => onClick())}
-      className={`w-24 rounded-md bg-gray-700 p-2 text-white shadow-lg transition hover:scale-110 ${className}`}
+      className={`w-28 rounded-md bg-gray-700 p-2 text-white shadow-lg transition hover:scale-110 ${className}`}
     >
       <Link href={url ? url : ""}>
         <div className="flex flex-row place-items-center justify-center">
@@ -73,7 +73,7 @@ export default function Navbar() {
           }}
         />
         <NavButton
-          title="Blogs"
+          title="About me"
           iconTypeOpen={<FaBlogger />}
           iconTypeClose={<FaBlogger />}
           onClick={() => {

@@ -13,8 +13,8 @@ export default function Camera() {
   };
 
   useThree(({ camera }) => {
-    camera.position.set(position.x, position.y, position.z);
-    camera.rotation.set(rotation.x, rotation.y, rotation.z);
+    //camera.position.set(position.x, position.y, position.z);
+    //camera.rotation.set(rotation.x, rotation.y, rotation.z);
   });
 
   return <></>;
