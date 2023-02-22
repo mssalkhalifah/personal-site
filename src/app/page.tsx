@@ -47,21 +47,21 @@ export default function Page() {
         <div className="flex h-full w-[1920px]">
           <div className="mx-20 flex h-full w-full place-items-center justify-center">
             <div className="flex w-1/2 flex-col justify-center">
-              <div className="rounded-lg bg-zinc-900 p-10 shadow-md shadow-zinc-700">
+              <div className="relative flex max-w-screen-md place-items-center overflow-visible rounded-lg bg-zinc-900 p-10 shadow-md shadow-zinc-700">
                 <Image
-                  className="rounded-lg shadow-md"
+                  className="absolute -left-8 rounded-lg"
                   src={profileImage}
-                  height={300}
-                  width={300}
+                  height={150}
+                  width={150}
                   alt={""}
                 />
-                <p className="mt-4 max-w-screen-md text-2xl">
+                <p className="ml-24 text-2xl">
                   A bachelor of computer science at Imam Mohammad Ibn Saud
                   Islamic University with first-class honor. A Saudi. And like
-                  developing video games and web apps as a hobby.
+                  programming video games and web apps as a hobby.
                 </p>
               </div>
-              <ul className="mt-4 list-inside list-disc rounded-lg bg-zinc-900 p-10 text-2xl shadow-md shadow-zinc-700">
+              <ul className="mt-4 max-w-screen-md list-inside list-disc rounded-lg bg-zinc-900 p-10 text-2xl shadow-md shadow-zinc-700">
                 <li>
                   Finished my preparatory year at Imam Mohammad Ibn Saud Islamic
                   University.
