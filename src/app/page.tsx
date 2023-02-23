@@ -6,7 +6,6 @@ import Image from "next/image";
 import { Suspense } from "react";
 import ProjectSection from "./project-section";
 import profileImage from "../../public/profile.jpg";
-import HelloWorld from "./hello.mdx";
 
 export default function Page() {
   return (
