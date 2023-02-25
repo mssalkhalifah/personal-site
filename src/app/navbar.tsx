@@ -47,9 +47,11 @@ function NavButton({
 }
 
 function DarkModeToggle() {
-  const [toggle, setToggle] = useState(localStorage.theme !== "dark");
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
+    setToggle(localStorage.theme !== "dark");
+
     if (toggle) {
       document.documentElement.classList.remove("dark");
       localStorage.theme = "light";
