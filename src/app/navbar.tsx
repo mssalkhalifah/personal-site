@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   FaFolder,
   FaFolderOpen,
@@ -32,7 +32,7 @@ function NavButton({
     <button
       onMouseOver={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
-      className={`w-24 rounded-lg bg-white p-2 shadow-md dark:bg-dark-blue ${className}`}
+      className={`w-24 rounded-lg bg-white p-2 shadow-md transition dark:bg-dark-blue ${className}`}
     >
       <Link href={url ? url : ""}>
         <div className="flex flex-row place-items-center justify-center">
@@ -47,21 +47,24 @@ function NavButton({
 }
 
 function DarkModeToggle() {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(localStorage.theme !== "dark");
+
+  useEffect(() => {
+    if (toggle) {
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+    }
+  }, [toggle]);
 
   return (
     <button
-      className="rounded-md bg-white p-3 shadow-md dark:bg-dark-blue"
-      onClick={() => {
-        setToggle(!toggle);
-        if (toggle) {
-          document.documentElement.classList.remove("dark");
-        } else {
-          document.documentElement.classList.add("dark");
-        }
-      }}
+      className="rounded-md bg-white p-3 shadow-md transition dark:bg-dark-blue"
+      onClick={() => setToggle(!toggle)}
     >
-      {toggle ? <FaMoon /> : <FaSun />}
+      {toggle ? <FaSun /> : <FaMoon />}
     </button>
   );
 }
