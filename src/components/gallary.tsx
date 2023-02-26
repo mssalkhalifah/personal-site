@@ -1,16 +1,10 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import Card from "./Card";
+import Card, { CardProps } from "./Card";
 
-interface Project {
-  title?: string;
-  imgUrl?: string;
-  date?: string;
-}
-
-interface GallaryProps {
-  projects: Project[];
+export interface GallaryProps {
+  items: CardProps[];
 }
 
 const move = (
@@ -32,21 +26,17 @@ const move = (
   }
 };
 
-export default function Gallary({ projects }: GallaryProps) {
+export default function Gallary({ items }: GallaryProps) {
   let index = 0;
   const refs = useRef<HTMLDivElement[]>([]);
   const parentRef = useRef<HTMLDivElement>(null);
   const [isFocus, setFocus] = useState<boolean[]>(
-    Array(projects.length).fill(false)
+    Array(items.length).fill(false)
   );
   const [currIndex, setCurrIndex] = useState<number>(0);
   const observer = useRef<IntersectionObserver>(null);
   const addNode = useCallback((node: HTMLDivElement) => {
     refs.current.push(node);
-    const lastPos = refs.current.length - 1;
-    if (refs.current) {
-      refs.current[lastPos].id = `${lastPos}`;
-    }
   }, []);
 
   const handler = (entries: IntersectionObserverEntry[]) => {
@@ -92,9 +82,9 @@ export default function Gallary({ projects }: GallaryProps) {
       newObserver.observe(node);
     }
 
-    if (parentRef.current) {
-      const middleItem = refs.current[Math.ceil(refs.current.length / 2)];
-      parentRef.current.scrollBy(middleItem.offsetWidth, 0);
+    if (refs.current) {
+      const lastPos = refs.current.length - 1;
+      refs.current[lastPos].id = `${lastPos}`;
     }
 
     return () => newObserver.disconnect();
@@ -111,14 +101,20 @@ export default function Gallary({ projects }: GallaryProps) {
         <div className="invisible min-w-fit">
           <Card />
         </div>
-        {projects.map((project) => {
+        {items.map((item) => {
           return (
             <div
               className="min-w-fit snap-center"
               ref={addNode}
-              key={project.title! + index}
+              key={item.title! + index}
             >
-              <Card isFocus={isFocus[index++]} title={project.title} />
+              <Card
+                tags={item.tags}
+                imageUrl={item.imageUrl}
+                url={item.url}
+                isFocus={isFocus[index++]}
+                title={item.title}
+              />
             </div>
           );
         })}

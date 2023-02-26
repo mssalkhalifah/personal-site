@@ -1,35 +1,27 @@
 import Gallary from "@/components/gallary";
-
-/*
-* {
-    "albumId": 1,
-    "id": 1,
-    "title": "accusamus beatae ad facilis cum similique qui sunt",
-    "url": "https://via.placeholder.com/600/92c952",
-    "thumbnailUrl": "https://via.placeholder.com/150/92c952"
-  }
- */
-interface Project {
-  title?: string;
-  imgUrl?: string;
-  date?: string;
-}
+import matter from "gray-matter";
+import { readFileSync, readdirSync } from "fs";
+import { CardProps } from "@/components/Card";
+import path from "node:path/posix";
 
 async function getProjects() {
-  const delay = (ms: number): Promise<unknown> => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
+  const folder = path.join(process.cwd(), "public/posts/projects");
+  const projects: CardProps[] = [];
+  const files = readdirSync(folder).filter((file) => file.endsWith(".mdx"));
+  const slugs = files.map((file) => {
+    const dotIndex = file.lastIndexOf(".");
+    const slug = file.substring(0, dotIndex);
 
-  const res = await fetch("https://jsonplaceholder.typicode.com/photos");
-  const resJson = await res.json();
-  const projects: Project[] = [];
+    return "projects/" + slug;
+  });
 
-  await delay(1);
-
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < files.length; i++) {
+    const fileContent = readFileSync(folder + "/" + files[i], "utf8");
+    const frontMatter = matter(fileContent);
     projects.push({
-      title: resJson[i].id,
-      imgUrl: resJson[i].thumbnailUrl,
+      title: frontMatter.data.title,
+      url: slugs[i],
+      tags: frontMatter.data.tags,
     });
   }
 
@@ -39,5 +31,5 @@ async function getProjects() {
 export default async function ProjectSection() {
   const projects = await getProjects();
 
-  return <Gallary projects={projects} />;
+  return <Gallary items={projects} />;
 }
