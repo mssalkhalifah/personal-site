@@ -15,7 +15,7 @@ async function getProjects() {
   });
 
   for (let i = 0; i < files.length; i++) {
-    const fileContent = readFileSync(folder + "/" + files[0], "utf8");
+    const fileContent = readFileSync(folder + "/" + files[i], "utf8");
     const frontMatter = matter(fileContent);
     projects.push({
       title: frontMatter.data.title,

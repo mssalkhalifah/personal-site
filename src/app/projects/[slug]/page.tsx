@@ -1,6 +1,9 @@
 import { readFile } from "fs/promises";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
+import Scene from "@/components/scene";
+
+const components = { Scene };
 
 async function getProjectPostContent(slug: string): Promise<string> {
   return await readFile("posts/projects/".concat(slug, ".mdx"), "utf8");
@@ -13,7 +16,12 @@ export default async function page({ params }: { params: { slug: string } }) {
   return (
     <div className="prose prose-invert">
       {/* @ts-expect-error Server Component */}
-      <MDXRemote source={grayMatter.content} compiledSource={""} />;
+      <MDXRemote
+        source={grayMatter.content}
+        compiledSource={""}
+        components={components}
+      />
+      ;
     </div>
   );
 }
