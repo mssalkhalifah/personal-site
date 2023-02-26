@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import Card, { CardProps } from "./Card";
 
-interface GallaryProps {
+export interface GallaryProps {
   items: CardProps[];
 }
 

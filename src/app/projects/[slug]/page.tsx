@@ -2,11 +2,15 @@ import { readFile } from "fs/promises";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
 import Scene from "@/components/scene";
+import path from "path";
+
+export const dynamic = "force-dynamic";
 
 const components = { Scene };
 
 async function getProjectPostContent(slug: string): Promise<string> {
-  return await readFile("posts/projects/".concat(slug, ".mdx"), "utf8");
+  const mdxPath = path.join(process.cwd(), "public/posts/projects");
+  return await readFile(`${mdxPath}/`.concat(slug, ".mdx"), "utf8");
 }
 
 export default async function page({ params }: { params: { slug: string } }) {

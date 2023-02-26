@@ -2,9 +2,10 @@ import Gallary from "@/components/gallary";
 import matter from "gray-matter";
 import { readFileSync, readdirSync } from "fs";
 import { CardProps } from "@/components/Card";
+import path from "node:path/posix";
 
 async function getProjects() {
-  const folder = "posts/projects";
+  const folder = path.join(process.cwd(), "public/posts/projects");
   const projects: CardProps[] = [];
   const files = readdirSync(folder).filter((file) => file.endsWith(".mdx"));
   const slugs = files.map((file) => {
