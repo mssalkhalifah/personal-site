@@ -1,9 +1,9 @@
-interface TagProps {
+export interface ITag {
   title?: string;
   color?: number;
 }
 
-export default function Tag({ title, color }: TagProps) {
+const Tag: React.FC<ITag> = ({ title, color }) => {
   const colors = ["bg-red-200", "bg-blue-200", "bg-yellow-200"];
   return (
     <div
@@ -14,4 +14,6 @@ export default function Tag({ title, color }: TagProps) {
       <p>{title}</p>
     </div>
   );
-}
+};
+
+export default Tag;

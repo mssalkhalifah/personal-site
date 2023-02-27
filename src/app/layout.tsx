@@ -1,6 +1,5 @@
 import "./globals.css";
-import "./crt.css";
-import Navbar from "./navbar";
+import Navbar from "@/components/navbar/Navbar";
 
 export default function RootLayout({
   children,

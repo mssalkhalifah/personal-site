@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface IContainer {
   id?: string;
   children?: React.ReactNode;

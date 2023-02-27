@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ReactNode, useState } from "react";
 import { FaFolder, FaFolderOpen, FaHome, FaBlogger } from "react-icons/fa";
 
+export interface INavbar {}
+
 interface NavButton {
   title?: string;
   className?: string;
@@ -42,7 +44,7 @@ function NavButton({
   );
 }
 
-export default function Navbar() {
+const Navbar: React.FC<INavbar> = ({}) => {
   return (
     <nav className="fixed top-0 z-[5] mt-4 flex w-full justify-center">
       <div>
@@ -87,4 +89,6 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;
