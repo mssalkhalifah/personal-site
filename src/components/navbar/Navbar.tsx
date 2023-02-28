@@ -46,7 +46,7 @@ function NavButton({
 
 const Navbar: React.FC<INavbar> = ({}) => {
   return (
-    <nav className="fixed top-0 z-[5] mt-4 flex w-full justify-center">
+    <nav className="fixed top-0 z-[5] mt-4 flex w-full place-items-center justify-around">
       <div>
         <NavButton
           title="Home"
@@ -86,6 +86,17 @@ const Navbar: React.FC<INavbar> = ({}) => {
             });
           }}
         />
+      </div>
+      <div className="text-lg">
+        <Link href={"#"}>
+          <span className="hover:underline">Projects</span>
+        </Link>
+        <Link className="mx-7" href={"#"}>
+          <span className="hover:underline">Blogs</span>
+        </Link>
+        <Link href={"#"}>
+          <span className="hover:underline">Resume</span>
+        </Link>
       </div>
     </nav>
   );
