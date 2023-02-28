@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "echo \" Not implemented yet\""
+    "test": "echo \" Not implemented yet\"",
+    "create": "./bin/create_component.sh"
   },
   "dependencies": {
     "@next/font": "13.1.5",

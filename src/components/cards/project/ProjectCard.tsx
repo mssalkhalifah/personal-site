@@ -1,11 +1,11 @@
 "use client";
 
+import Tag from "../../tags/tag/Tag";
 import Image from "next/image";
-import Tag from "./Tag";
-import placeholder from "../../public/thumb_placeholder.png";
+import placeholder from "../../../../public/thumb_placeholder.png";
 import Link from "next/link";
 
-export interface CardProps {
+export interface IProjectCard {
   title?: string;
   date?: string;
   imageUrl?: string;
@@ -14,17 +14,18 @@ export interface CardProps {
   isFocus?: boolean;
 }
 
-export default function Card({
+const ProjectCard: React.FC<IProjectCard> = ({
   title,
   date,
   imageUrl,
   url,
   tags,
   isFocus = false,
-}: CardProps) {
+}) => {
   let colorIndex = 0;
   const focus = isFocus ? "scale-105 opacity-100" : "scale-90 opacity-25";
-  const buttonVisiblity = isFocus ? "visible h-full" : "invisible h-[0px]";
+  const buttonVisiblity = isFocus ? "visible h-full" : "hidden";
+
   return (
     <div
       className={`m-2 flex flex-col rounded-md bg-white p-4 text-zinc-900 transition ${focus}`}
@@ -56,4 +57,6 @@ export default function Card({
       </div>
     </div>
   );
-}
+};
+
+export default ProjectCard;

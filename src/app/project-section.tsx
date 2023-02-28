@@ -1,12 +1,12 @@
-import Gallary from "@/components/gallary";
 import matter from "gray-matter";
 import { readFileSync, readdirSync } from "fs";
-import { CardProps } from "@/components/Card";
 import path from "node:path/posix";
+import ProjectCarousel from "@/components/carousel/project/ProjectCarousel";
+import { IProjectCard } from "@/components/cards/project/ProjectCard";
 
 async function getProjects() {
   const folder = path.join(process.cwd(), "public/posts/projects");
-  const projects: CardProps[] = [];
+  const projects: IProjectCard[] = [];
   const files = readdirSync(folder).filter((file) => file.endsWith(".mdx"));
   const slugs = files.map((file) => {
     const dotIndex = file.lastIndexOf(".");
@@ -31,5 +31,5 @@ async function getProjects() {
 export default async function ProjectSection() {
   const projects = await getProjects();
 
-  return <Gallary items={projects} />;
+  return <ProjectCarousel items={projects} />;
 }
