@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { FaFolder, FaFolderOpen, FaHome, FaBlogger } from "react-icons/fa";
 
 export interface INavbar {}
@@ -45,8 +45,32 @@ function NavButton({
 }
 
 const Navbar: React.FC<INavbar> = ({}) => {
+  const [top, setTop] = useState("");
+  const topStyle = "bg-zinc-500/50 backdrop-blur-md";
+
+  const onScroll = () => {
+    if (window.pageYOffset === 0) {
+      console.log("Scroll is at top");
+      setTop("");
+    } else {
+      setTop(topStyle);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+
+    if (window.pageYOffset !== 0) {
+      setTop(topStyle);
+    }
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 z-[5] mt-4 flex w-full place-items-center justify-around">
+    <nav
+      className={`fixed top-0 z-[5] flex w-full place-items-center justify-around p-2 transition-colors ${top}`}
+    >
       <div>
         <NavButton
           title="Home"
