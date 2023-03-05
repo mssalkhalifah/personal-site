@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import { FaFolder, FaFolderOpen, FaHome, FaBlogger } from "react-icons/fa";
+import Container from "../layouts/container/Container";
 
 export interface INavbar {}
 
@@ -53,11 +54,16 @@ const Navbar: React.FC<INavbar> = ({}) => {
   const scrollPosition = useScrollPosition();
   const pathname = usePathname();
   const [focus, setFocus] = useState([true, false, false]);
-  const [scrollTo, setScrollTo] = useState(0);
   const [sectionElements, setSectionElements] = useState<
     (HTMLElement | null)[]
   >([]);
   const topStyle = "bg-zinc-500/50 backdrop-blur-md";
+  const scrollTo = (i: number) => {
+    window.scrollTo({
+      top: sectionElements[i]?.offsetTop,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     if (pathname?.length === 1) {
@@ -94,59 +100,57 @@ const Navbar: React.FC<INavbar> = ({}) => {
     } else {
       setFocus([false, false, false]);
     }
-  }, [pathname, scrollPosition, scrollTo, sectionElements]);
-
-  useEffect(() => {
-    window.scrollTo({
-      top: sectionElements[scrollTo]?.offsetTop,
-      behavior: "smooth",
-    });
-  }, [scrollTo, sectionElements]);
+  }, [pathname, scrollPosition, sectionElements]);
 
   return (
-    <nav
-      className={`fixed top-0 z-[5] flex w-full place-items-center justify-between p-2 transition-colors ${
-        scrollPosition > 0 && topStyle
-      }`}
-    >
-      <div>
-        <NavButton
-          title="Home"
-          iconTypeOpen={<FaHome />}
-          iconTypeClose={<FaHome />}
-          url="/"
-          focus={focus[0]}
-          onClick={() => setScrollTo(0)}
-        />
-        <NavButton
-          title="Projects"
-          className="mx-7"
-          iconTypeOpen={<FaFolderOpen />}
-          iconTypeClose={<FaFolder />}
-          url="/"
-          focus={focus[1]}
-          onClick={() => setScrollTo(1)}
-        />
-        <NavButton
-          title="About me"
-          iconTypeOpen={<FaBlogger />}
-          iconTypeClose={<FaBlogger />}
-          url="/"
-          focus={focus[2]}
-          onClick={() => setScrollTo(2)}
-        />
-      </div>
-      <div className="mr-2 text-lg">
-        <Link href={"#"}>
-          <span className="hover:underline">Projects</span>
-        </Link>
-        <Link className="mx-7" href={"#"}>
-          <span className="hover:underline">Blogs</span>
-        </Link>
-        <Link href={"#"}>
-          <span className="hover:underline">Resume</span>
-        </Link>
-      </div>
+    <nav className={`fixed left-0 top-0 z-[5] flex w-full`}>
+      <Container>
+        <div
+          className={`flex w-full place-items-center justify-between rounded-lg p-2 transition-all duration-300 ${
+            scrollPosition > 0 &&
+            "mx-2 translate-y-2 bg-zinc-500/50 backdrop-blur-md"
+          }`}
+        >
+          <div>
+            <NavButton
+              title="Home"
+              iconTypeOpen={<FaHome />}
+              iconTypeClose={<FaHome />}
+              url="/"
+              focus={focus[0]}
+              onClick={() => scrollTo(0)}
+            />
+            <NavButton
+              title="Projects"
+              className="mx-4"
+              iconTypeOpen={<FaFolderOpen />}
+              iconTypeClose={<FaFolder />}
+              url="/"
+              focus={focus[1]}
+              onClick={() => scrollTo(1)}
+            />
+            <NavButton
+              title="About me"
+              iconTypeOpen={<FaBlogger />}
+              iconTypeClose={<FaBlogger />}
+              url="/"
+              focus={focus[2]}
+              onClick={() => scrollTo(2)}
+            />
+          </div>
+          <div className="mr-2 text-lg">
+            <Link href={"#"}>
+              <span className="hover:underline">Projects</span>
+            </Link>
+            <Link className="mx-7" href={"#"}>
+              <span className="hover:underline">Blogs</span>
+            </Link>
+            <Link href={"#"}>
+              <span className="hover:underline">Resume</span>
+            </Link>
+          </div>
+        </div>
+      </Container>
     </nav>
   );
 };
