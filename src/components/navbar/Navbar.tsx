@@ -57,7 +57,6 @@ const Navbar: React.FC<INavbar> = ({}) => {
   const [sectionElements, setSectionElements] = useState<
     (HTMLElement | null)[]
   >([]);
-  const topStyle = "bg-zinc-500/50 backdrop-blur-md";
   const scrollTo = (i: number) => {
     window.scrollTo({
       top: sectionElements[i]?.offsetTop,
@@ -139,13 +138,13 @@ const Navbar: React.FC<INavbar> = ({}) => {
             />
           </div>
           <div className="mr-2 text-lg">
-            <Link href={"#"}>
+            <Link href={"/projects"}>
               <span className="hover:underline">Projects</span>
             </Link>
-            <Link className="mx-7" href={"#"}>
+            <Link className="mx-7" href={"/blogs"}>
               <span className="hover:underline">Blogs</span>
             </Link>
-            <Link href={"#"}>
+            <Link href={"/resume"}>
               <span className="hover:underline">Resume</span>
             </Link>
           </div>
