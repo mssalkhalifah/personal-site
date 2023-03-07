@@ -1,23 +1,19 @@
-import Image from "next/image";
-import PlaceholderImage from "../../../../../public/thumb_placeholder.png";
+import { mockPostCardProps } from "@/components/cards/post/PostCard.mocks";
+import PostCard, { IPostCard } from "@/components/cards/post/PostCard";
 
-export interface IPostList {}
+export interface IPostList {
+  postCards?: IPostCard[];
+}
 
-const PostList: React.FC<IPostList> = ({}) => {
+const PostList: React.FC<IPostList> = ({ postCards }) => {
   return (
-    <div className="mr-4 flex flex-col place-items-center">
+    <div className="mr-4 mb-4 flex flex-col place-items-center overflow-y-auto">
       <ol>
         <li>
-          <Image src={PlaceholderImage} alt={"First"} />
+          <PostCard {...mockPostCardProps.base} />
         </li>
-        <li className="mt-2">
-          <Image src={PlaceholderImage} alt={"First"} />
-        </li>
-        <li className="mt-2">
-          <Image src={PlaceholderImage} alt={"First"} />
-        </li>
-        <li className="mt-2">
-          <Image src={PlaceholderImage} alt={"First"} />
+        <li className="mt-4">
+          <PostCard {...mockPostCardProps.base} />
         </li>
       </ol>
     </div>
