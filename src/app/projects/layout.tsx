@@ -7,7 +7,9 @@ export default function layout({ children }: { children: React.ReactNode }) {
         <div className="hidden xl:col-span-3 xl:block">
           <PostList />
         </div>
-        <div className="col-span-6 mx-4 xl:col-span-3 xl:mx-0">{children}</div>
+        <div className="col-span-6 mx-4 xl:col-span-3 xl:mx-0 xl:w-[583.9px]">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -7,15 +7,9 @@ export interface IPostList {
 
 const PostList: React.FC<IPostList> = ({ postCards }) => {
   return (
-    <div className="mr-4 mb-4 flex flex-col place-items-center overflow-y-auto">
-      <ol>
-        <li>
-          <PostCard {...mockPostCardProps.base} />
-        </li>
-        <li className="mt-4">
-          <PostCard {...mockPostCardProps.base} />
-        </li>
-      </ol>
+    <div className="mr-4 mb-4 flex flex-col place-items-center space-y-4 overflow-y-auto">
+      <PostCard {...mockPostCardProps.base} />
+      <PostCard {...mockPostCardProps.base} />
     </div>
   );
 };

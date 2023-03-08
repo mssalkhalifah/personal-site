@@ -3,11 +3,11 @@ import BackgroundImage from "../../../public/projects_placeholder.jpg";
 
 export default function page() {
   return (
-    <div className="">
+    <div className="flex h-full place-items-center justify-center">
       <Image
+        className="object-contain"
         src={BackgroundImage}
         alt={"Project background image"}
-        width={583.9}
       />
     </div>
   );
