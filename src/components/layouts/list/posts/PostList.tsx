@@ -50,7 +50,7 @@ const PostList: React.FC<IPostList> = ({ postCards }) => {
   }, [paths]);
 
   return (
-    <div className="mr-4 mb-4 flex flex-col place-items-center space-y-4 overflow-y-auto">
+    <div className="mr-4 mb-4 flex w-full flex-col justify-center space-y-4 overflow-y-auto">
       {postCards?.map((postCard, index: number) => {
         return (
           <div
