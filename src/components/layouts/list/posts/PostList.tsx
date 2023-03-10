@@ -29,17 +29,21 @@ const PostList: React.FC<IPostList> = ({ postCards }) => {
     const currentPaths = paths?.split("/");
 
     if (currentPaths) {
-      selected.forEach((_, i) => {
-        if (currentPaths && postCards) {
-          const hasPath = postCards[i].url?.endsWith(
-            currentPaths[currentPaths?.length - 1]
-          );
+      if (currentPaths.length <= 2) {
+        setSelected(Array(postCards?.length).fill(""));
+      } else {
+        selected.forEach((_, i) => {
+          if (currentPaths && postCards) {
+            const hasPath = postCards[i].url?.endsWith(
+              currentPaths[currentPaths?.length - 1]
+            );
 
-          if (hasPath) {
-            setBackground(i);
+            if (hasPath) {
+              setBackground(i);
+            }
           }
-        }
-      });
+        });
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
