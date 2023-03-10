@@ -1,10 +1,9 @@
 import { readFile } from "fs/promises";
+import { readdirSync } from "fs";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
 import Scene from "@/components/scene";
 import path from "path";
-
-export const dynamic = "force-dynamic";
 
 const components = { Scene };
 
@@ -28,4 +27,13 @@ export default async function page({ params }: { params: { slug: string } }) {
       ;
     </div>
   );
+}
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const folder = path.join(process.cwd(), "public/posts/projects");
+  const files = readdirSync(folder).filter((file) => file.endsWith(".mdx"));
+
+  return files.map((file) => ({
+    slug: file.substring(0, file.lastIndexOf(".")),
+  }));
 }
