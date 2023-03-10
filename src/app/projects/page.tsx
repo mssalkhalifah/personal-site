@@ -7,6 +7,7 @@ export default function page() {
       <Image
         className="object-contain"
         src={BackgroundImage}
+        width={500}
         alt={"Project background image"}
       />
     </div>
