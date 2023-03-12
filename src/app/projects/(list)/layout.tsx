@@ -1,35 +1,22 @@
-import { mockPostCardProps } from "@/components/cards/post/PostCard.mocks";
-import { readdirSync, readFileSync } from "fs";
-import matter from "gray-matter";
 import PostList from "@/components/layouts/list/posts/PostList";
-import path from "node:path/posix";
 import { IPostCard } from "@/components/cards/post/PostCard";
+import { getProjectHeads } from "@/lib/projects";
 
 export default async function layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const folder = path.join(process.cwd(), "public/posts/projects");
-  const files = readdirSync(folder).filter((file) => file.endsWith(".mdx"));
-  const slugs = files.map((file) => {
-    const dotIndex = file.lastIndexOf(".");
-    const slug = file.substring(0, dotIndex);
-
-    return "projects/" + slug;
-  });
-
+  const projectHeads = await getProjectHeads();
   const postList: IPostCard[] = [];
-  files.forEach((file, index) => {
-    const fileContent = readFileSync(folder + "/" + file, "utf8");
-    const frontMatter = matter(fileContent);
-
+  projectHeads.forEach((head) => {
     postList.push({
-      title: frontMatter.data.title,
-      url: slugs[index],
-      imageUrl: mockPostCardProps.base.imageUrl,
-      description: mockPostCardProps.base.description,
-      date: mockPostCardProps.base.date,
+      title: head.title,
+      url: head.url,
+      imageUrl: head.imageThumb,
+      imageAlt: head.title,
+      description: head.description,
+      date: head.date,
     });
   });
 

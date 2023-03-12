@@ -1,5 +1,5 @@
 import { IPostCard } from "./PostCard";
-import PlaceholderImage from "../../../../public/thumb_placeholder.png";
+import PlaceholderImage from "../../../../public/thumb_placeholder.jpg";
 
 const base: IPostCard = {
   imageUrl: PlaceholderImage,
