@@ -12,7 +12,7 @@ export default async function layout({
   projectHeads.forEach((head) => {
     postList.push({
       title: head.title,
-      url: head.url,
+      url: "projects/" + head.url,
       imageUrl: head.imageThumb,
       imageAlt: head.title,
       description: head.description,

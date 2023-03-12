@@ -3,7 +3,7 @@
 import useScrollPosition from "@/hooks/useScrollPosition";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { FaFolder, FaFolderOpen, FaHome, FaBlogger } from "react-icons/fa";
 import Container from "../layouts/container/Container";
 
@@ -102,7 +102,7 @@ const Navbar: React.FC<INavbar> = ({}) => {
   }, [pathname, scrollPosition, sectionElements]);
 
   return (
-    <nav className={`fixed left-0 top-0 z-[5] flex w-full`}>
+    <nav className={`fixed left-0 top-0 z-20 flex w-full`}>
       <Container>
         <div
           className={`flex w-full place-items-center justify-between rounded-lg p-2 transition-all duration-300 ${

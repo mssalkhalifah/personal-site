@@ -38,7 +38,7 @@ export async function getProjectHeads(): Promise<IProjectHead[]> {
     const dotIndex = file.lastIndexOf(".");
     const slug = file.substring(0, dotIndex);
 
-    return "projects/" + slug;
+    return slug;
   });
 
   const projectHeads: IProjectHead[] = [];
