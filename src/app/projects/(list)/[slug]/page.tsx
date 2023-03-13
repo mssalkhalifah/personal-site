@@ -8,15 +8,14 @@ export default async function page({ params }: { params: { slug: string } }) {
   const projectContent = await getProject(params.slug);
 
   return (
-    <div className="prose prose-invert">
+    <>
       {/* @ts-expect-error Server Component */}
       <MDXRemote
         source={projectContent.content}
         compiledSource={""}
         components={components}
       />
-      ;
-    </div>
+    </>
   );
 }
 

@@ -5,22 +5,24 @@ export default async function page() {
   const projectHeads = await getProjectHeads();
 
   return (
-    <div className="left-0 top-0 mx-2 max-h-fit w-[720px] flex-col space-y-3 md:mx-0">
-      {projectHeads.map((head, index) => {
-        return (
-          <HorizontalPostCard
-            key={head.title}
-            title={head.title}
-            date={head.date}
-            tags={head.tags}
-            description={head.description}
-            url={"projects/" + head.url}
-            imageUrl={head.imageThumb}
-            imageAlt={head.title}
-            flip={index % 2 !== 0}
-          />
-        );
-      })}
+    <div className="flex h-full w-full justify-center">
+      <div className="mx-4 mb-2 max-w-2xl space-y-3 sm:m-0">
+        {projectHeads.map((head, index) => {
+          return (
+            <HorizontalPostCard
+              key={head.title}
+              title={head.title}
+              date={head.date}
+              tags={head.tags}
+              description={head.description}
+              url={"projects/" + head.url}
+              imageUrl={head.imageThumb}
+              imageAlt={head.title}
+              flip={index % 2 !== 0}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

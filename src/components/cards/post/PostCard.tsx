@@ -19,8 +19,11 @@ const PostCard: React.FC<IPostCard> = ({
   description,
 }): JSX.Element => {
   return (
-    <Link href={url || ""} className="flex h-40 w-full overflow-hidden">
-      <div className="relative mr-2 h-40 w-40 overflow-x-hidden rounded-lg">
+    <Link
+      href={url || ""}
+      className="flex max-h-[320px] w-full flex-col space-y-2 overflow-hidden"
+    >
+      <div className="relative mr-2 h-60 w-full overflow-x-hidden rounded-lg">
         <Image
           className="object-cover"
           src={imageUrl || ""}
@@ -28,7 +31,7 @@ const PostCard: React.FC<IPostCard> = ({
           fill
         />
       </div>
-      <div className="max-w-sm">
+      <div className="max-h-48 overflow-hidden">
         <p className="text-zinc-400">{date}</p>
         <h1 className="my-2 text-lg font-bold text-zinc-200">{title}</h1>
         <p className="text-zinc-400">{description}</p>

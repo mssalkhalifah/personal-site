@@ -21,14 +21,12 @@ export default async function layout({
   });
 
   return (
-    <div className="top-8 flex h-full w-full justify-center pt-20">
-      <div className="grid grid-cols-6 grid-rows-1 gap-4">
-        <div className="hidden xl:col-span-3 xl:block">
-          <PostList postCards={postList} />
-        </div>
-        <div className="col-span-6 mx-4 xl:col-span-3 xl:mx-0 xl:w-[583.9px]">
-          {children}
-        </div>
+    <div className="top-0 left-0 mx-4 grid grid-cols-6 grid-rows-1 gap-4">
+      <div className="hidden lg:col-span-2 lg:block">
+        <PostList postCards={postList} />
+      </div>
+      <div className="col-span-6 lg:col-span-4">
+        <div className="prose prose-lg prose-invert max-w-none">{children}</div>
       </div>
     </div>
   );
