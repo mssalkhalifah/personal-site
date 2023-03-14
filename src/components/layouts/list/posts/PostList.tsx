@@ -10,18 +10,18 @@ export interface IPostList {
 
 const PostList: React.FC<IPostList> = ({ postCards }) => {
   const paths = usePathname();
-  const [selected, setSelected] = useState<string[]>(
-    Array(postCards?.length).fill("")
+  const [selected, setSelected] = useState<boolean[]>(
+    Array(postCards?.length).fill(false)
   );
 
   const setBackground = (index: number): void => {
     const newSelectedList = [...selected];
 
     for (let i = 0; i < newSelectedList.length; i++) {
-      newSelectedList[i] = "";
+      newSelectedList[i] = false;
     }
 
-    newSelectedList.splice(index, 1, "bg-zinc-600");
+    newSelectedList.splice(index, 1, true);
     setSelected(newSelectedList);
   };
 
@@ -52,14 +52,11 @@ const PostList: React.FC<IPostList> = ({ postCards }) => {
   }, [paths]);
 
   return (
-    <div className="mr-4 mb-4 flex w-full flex-col justify-center space-y-4 overflow-y-auto">
+    <div className="mb-4 flex w-full flex-col justify-center space-y-4 overflow-y-auto">
       {postCards?.map((postCard, index: number) => {
         return (
-          <div
-            key={postCard.url}
-            className={`rounded-lg p-4 transition-colors ${selected[index++]}`}
-          >
-            <PostCard {...postCard} />
+          <div key={postCard.url} className="rounded-lg p-4 transition-colors">
+            <PostCard {...postCard} isSelected={selected[index++]} />
           </div>
         );
       })}
