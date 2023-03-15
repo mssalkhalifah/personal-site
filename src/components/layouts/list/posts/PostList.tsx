@@ -52,7 +52,7 @@ const PostList: React.FC<IPostList> = ({ postCards }) => {
   }, [paths]);
 
   return (
-    <div className="mb-4 flex w-full flex-col justify-center space-y-4 overflow-y-auto">
+    <div className="mb-4 flex w-full flex-col justify-center space-y-1 overflow-y-auto">
       {postCards?.map((postCard, index: number) => {
         return (
           <div key={postCard.url} className="rounded-lg p-4 transition-colors">

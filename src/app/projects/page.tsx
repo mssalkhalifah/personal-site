@@ -6,7 +6,7 @@ export default async function page() {
 
   return (
     <div className="flex h-full w-full justify-center">
-      <div className="mx-4 mb-2 max-w-2xl space-y-3 sm:m-0">
+      <div className="mx-4 mb-2 space-y-3 sm:m-0">
         {projectHeads.map((head, index) => {
           return (
             <HorizontalPostCard

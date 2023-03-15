@@ -33,7 +33,7 @@ const HorizontalPostCard: React.FC<IHorizontalPostCard> = ({
 }): JSX.Element => {
   return (
     <div
-      className={`relative flex h-60 w-full ${
+      className={`relative flex h-60 w-full md:w-[700px] ${
         flip && "flex-row-reverse"
       } overflow-hidden rounded-md bg-zinc-100 text-zinc-50 shadow-lg md:text-zinc-900`}
     >
