@@ -2,7 +2,7 @@
 
 import Tag from "../../tags/tag/Tag";
 import Image from "next/image";
-import placeholder from "../../../../public/thumb_placeholder.png";
+import placeholder from "../../../../public/thumb_placeholder.jpg";
 import Link from "next/link";
 
 export interface IProjectCard {
