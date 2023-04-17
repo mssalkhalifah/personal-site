@@ -15,7 +15,7 @@ export interface IHorizontalPostCard {
 
 const Tag: React.FC<{ title: string }> = ({ title }: { title: string }) => {
   return (
-    <div className="rounded-md border-2 border-solid border-zinc-50 px-2 text-xs text-zinc-50 sm:text-sm md:border-zinc-600 md:text-zinc-600">
+    <div className="rounded-md border-2 border-solid border-third px-2 text-xs text-third sm:text-sm">
       {title}
     </div>
   );
@@ -35,7 +35,7 @@ const HorizontalPostCard: React.FC<IHorizontalPostCard> = ({
     <div
       className={`relative flex h-60 w-full md:w-[700px] ${
         flip && "flex-row-reverse"
-      } overflow-hidden rounded-md bg-zinc-100 text-zinc-50 shadow-lg md:text-zinc-900`}
+      } overflow-hidden rounded-md bg-secondary text-fourth shadow-lg md:text-primary`}
     >
       <Image
         className="absolute opacity-100 md:opacity-0"
@@ -43,7 +43,7 @@ const HorizontalPostCard: React.FC<IHorizontalPostCard> = ({
         alt={imageAlt || "placeholder"}
         fill
       />
-      <div className="absolute z-10 h-full w-full bg-zinc-900/50 md:bg-transparent"></div>
+      <div className="absolute z-10 h-full w-full bg-primary/60 md:bg-transparent"></div>
       <div className="relative hidden h-full w-96 md:inline-block">
         <Image
           className="object-cover"
@@ -68,7 +68,7 @@ const HorizontalPostCard: React.FC<IHorizontalPostCard> = ({
           <div className="mt-1 flex w-full place-items-center justify-between">
             <Tag title={date} />
             <Link href={url}>
-              <button className="rounded-md bg-zinc-900 px-2 py-1 text-xs text-zinc-50 shadow-md transition-transform hover:scale-105 sm:text-sm">
+              <button className="rounded-md bg-fourth px-2 py-1 text-xs text-primary shadow-md transition-transform hover:scale-105 sm:text-sm">
                 Read More
               </button>
             </Link>

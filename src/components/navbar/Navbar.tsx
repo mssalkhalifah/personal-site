@@ -29,7 +29,7 @@ const Navbar: React.FC<INavbar> = ({}) => {
   }, [pathname]);
 
   return (
-    <nav className="z-20 w-full">
+    <nav className="fixed z-20 w-full bg-primary/50 backdrop-blur">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -44,23 +44,23 @@ const Navbar: React.FC<INavbar> = ({}) => {
             </button>
             <div className="flex-shrink-0">
               <Link href="/">
-                <p className="text-xl font-bold text-white">My Website</p>
+                <p className="text-xl font-bold text-secondary">My Website</p>
               </Link>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link href="/">
-                  <p className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                  <p className="rounded-md px-3 py-2 text-sm font-medium text-fourth hover:bg-gray-700 hover:text-white">
                     Home
                   </p>
                 </Link>
                 <Link href="/projects">
-                  <p className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                  <p className="rounded-md px-3 py-2 text-sm font-medium text-fourth hover:bg-gray-700 hover:text-white">
                     Projects
                   </p>
                 </Link>
                 <Link href="/contact">
-                  <p className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                  <p className="rounded-md px-3 py-2 text-sm font-medium text-fourth hover:bg-gray-700 hover:text-white">
                     Contact
                   </p>
                 </Link>
@@ -104,17 +104,17 @@ const Navbar: React.FC<INavbar> = ({}) => {
           } sm:px-3`}
         >
           <Link href="/">
-            <p className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+            <p className="block rounded-md px-3 py-2 text-base font-medium text-fourth hover:bg-third hover:text-primary">
               Home
             </p>
           </Link>
           <Link href="/projects">
-            <p className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+            <p className="block rounded-md px-3 py-2 text-base font-medium text-fourth hover:bg-third hover:text-primary">
               Projects
             </p>
           </Link>
           <Link href="">
-            <p className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+            <p className="block rounded-md px-3 py-2 text-base font-medium text-fourth hover:bg-third hover:text-primary">
               Contact
             </p>
           </Link>

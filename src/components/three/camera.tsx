@@ -1,21 +1,21 @@
-import { useThree } from "@react-three/fiber";
+import { OrthographicCamera } from "@react-three/drei";
+import { Euler, Vector3 } from "@react-three/fiber";
 
 export default function Camera() {
-  const position = {
-    x: -3,
-    y: 5.000000000000001,
-    z: 10.586740722153886,
-  };
-  const rotation = {
-    x: -0.13784800693667534,
-    y: 0,
-    z: 0,
-  };
+  const zoom = 143.2194277655406;
+  const position: Vector3 = [
+    7.067248505627446, 4.701914197368265, 7.067248505627447,
+  ];
+  const rotation: Euler = [
+    -0.4753633462470281, 0.726775054319697, 0.32954820392304146,
+  ];
 
-  useThree(({ camera }) => {
-    //camera.position.set(position.x, position.y, position.z);
-    //camera.rotation.set(rotation.x, rotation.y, rotation.z);
-  });
-
-  return <></>;
+  return (
+    <OrthographicCamera
+      makeDefault
+      rotation={rotation}
+      position={position}
+      zoom={zoom}
+    />
+  );
 }
