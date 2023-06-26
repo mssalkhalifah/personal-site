@@ -5,26 +5,35 @@ interface IMousePosition {
   y: number;
 }
 
-const useMousePositionNormalized = (): IMousePosition => {
+const useMousePositionNormalized = (id?: string): IMousePosition => {
   const [mousePosition, setMousePosition] = useState<IMousePosition>({
-    x: 0,
-    y: 0,
+    x: window.outerWidth,
+    y: window.outerHeight,
   });
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      const boundingRect = (
-        event.target as HTMLElement
-      ).getBoundingClientRect();
-      const x = ((event.x - boundingRect.left) / boundingRect.width) * 2 - 1;
-      const y = -((event.y - boundingRect.top) / boundingRect.height) * 2 + 1;
+      const htmlElement = event.target as HTMLElement;
+      const boundingRect = htmlElement.getBoundingClientRect();
 
-      setMousePosition({ x, y });
+      if (id) {
+        if (htmlElement.id === id) {
+          const x =
+            ((event.x - boundingRect.left) / boundingRect.width) * 2 - 1;
+          const y =
+            -((event.y - boundingRect.top) / boundingRect.height) * 2 + 1;
+          setMousePosition({ x, y });
+        }
+      } else {
+        const x = ((event.x - boundingRect.left) / boundingRect.width) * 2 - 1;
+        const y = -((event.y - boundingRect.top) / boundingRect.height) * 2 + 1;
+        setMousePosition({ x, y });
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [id]);
 
   return mousePosition;
 };

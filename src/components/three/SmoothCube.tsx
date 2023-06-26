@@ -1,7 +1,6 @@
 import useMousePositionNormalized from "@/hooks/useMousePositionNormalized";
-import { useSpring } from "@react-spring/three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { BoxGeometry, Group, Object3D, Raycaster, Vector2 } from "three";
 
 const getNeighbors = (
@@ -43,7 +42,7 @@ function lerp(
 }
 
 const SmoothCube = () => {
-  const mousePos = useMousePositionNormalized();
+  const mousePos = useMousePositionNormalized("myCanvas");
   const pointer = new Vector2();
   const raycaster = new Raycaster();
   const { camera } = useThree();
