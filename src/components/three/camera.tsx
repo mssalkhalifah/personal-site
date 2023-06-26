@@ -2,7 +2,7 @@ import { OrthographicCamera } from "@react-three/drei";
 import { Euler, Vector3 } from "@react-three/fiber";
 
 export default function Camera() {
-  const zoom = 143.2194277655406;
+  const zoom = 80;
   const position: Vector3 = [
     7.067248505627446, 4.701914197368265, 7.067248505627447,
   ];

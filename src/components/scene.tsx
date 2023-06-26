@@ -20,7 +20,6 @@ export default function Scene() {
         <gridHelper />
         <SmoothCube />
         <Camera />
-        {isDebug ? <CameraDebug /> : <OrbitControls />}
       </Suspense>
     </Canvas>
     //<PostProcess />
