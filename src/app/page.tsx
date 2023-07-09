@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Suspense } from "react";
 import ProjectSection from "./project-section";
 import profileImage from "../../public/profile.jpg";
+import outsystemsIcon from "../../public/outsystems-icon.png";
+import Item from "@/components/list/item";
 import Container from "@/components/layouts/container/Container";
 import Name from "@/components/profile/name";
 
@@ -13,6 +15,61 @@ export default function Page() {
   return (
     <div className="absolute left-0 top-0 h-full w-full">
       <Scene />
+      <div className="flex h-full w-full place-items-center justify-center bg-third">
+        <div className="flex max-w-4xl flex-col justify-center space-y-4">
+          <div className="flex place-items-center space-x-2">
+            <Image
+              className="rounded-lg"
+              src={profileImage}
+              alt={"profileImage"}
+              width={150}
+              height={150}
+            />
+            <div className="space-y-2 text-center">
+              <h1 className=" text-3xl font-black">
+                Hi! My name is Mohammad Alkhalifah
+              </h1>
+              <p className="text-xl">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
+                quod dolorem quidem voluptas rerum magnam sed corrupti quisquam
+                at ipsam animi eum. Fugiat possimus voluptatibus aut laudantium
+                minima voluptates ratione?
+              </p>
+            </div>
+          </div>
+          <div className="rounded-lg bg-secondary p-4 shadow-md">
+            <h1 className="mb-5 text-center text-3xl font-black">
+              Checkout My Experiences!
+            </h1>
+            <div className="flex w-full flex-col space-y-6">
+              <Item
+                key={1}
+                title="OutSystems"
+                imageURL={outsystemsIcon}
+                barPercentage={60}
+              />
+              <Item
+                key={2}
+                title="NextJS"
+                imageURL={outsystemsIcon}
+                barPercentage={70}
+              />
+              <Item
+                key={3}
+                title="NextJS"
+                imageURL={outsystemsIcon}
+                barPercentage={70}
+              />
+              <Item
+                key={4}
+                title="NextJS"
+                imageURL={outsystemsIcon}
+                barPercentage={70}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     //<Container id="TopSection">
     //  <div className="flex h-full w-full place-items-center">
@@ -29,7 +86,6 @@ export default function Page() {
     //<Container id="ProjectSection" altBackgroundColour>
     //  <div className="flex h-full w-full place-items-center justify-center">
     //    <Suspense fallback={<p className="text-white">Loading...</p>}>
-    //      {/* @ts-expect-error Server Component */}
     //      <ProjectSection />
     //    </Suspense>
     //  </div>
