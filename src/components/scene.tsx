@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import Camera from "./three/camera";
 import CameraDebug from "./three/cameraDebug";
 import MyPointLightHelper from "./three/PointLightHelper";
-import SmoothCube from "./three/SmoothCube";
+import SmoothCube from "./three/SmoothCubes";
 import Configuration from "./three/configuration";
 
 export default function Scene() {

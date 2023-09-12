@@ -1,7 +1,9 @@
 import useMousePositionNormalized from "@/hooks/useMousePositionNormalized";
+import { lerp } from "@/utils/math";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
-import { BoxGeometry, Group, Object3D, Raycaster, Vector2 } from "three";
+import { useRef, useState } from "react";
+import { Group, Object3D, Raycaster, Vector2, Vector3 } from "three";
+import Cube from "./cube";
 
 const getNeighbors = (
   cube: Object3D<THREE.Event>,
@@ -28,25 +30,12 @@ const getNeighbors = (
   return neighbors;
 };
 
-function lerp(
-  startValue: number,
-  endValue: number,
-  lerpAmount: number
-): number {
-  const smoothedLerpAmount = (1 - Math.cos(lerpAmount * Math.PI)) / 2;
-  const easedLerpAmount =
-    smoothedLerpAmount * smoothedLerpAmount * (3 - 2 * smoothedLerpAmount);
-  const interpolatedValue =
-    startValue * (1 - easedLerpAmount) + endValue * easedLerpAmount;
-  return interpolatedValue;
-}
-
 const SmoothCube = () => {
+  const [isLoaded, setLoaded] = useState(false);
   const mousePos = useMousePositionNormalized("myCanvas");
   const pointer = new Vector2();
   const raycaster = new Raycaster();
   const { camera } = useThree();
-  const geometry = new BoxGeometry(1, 1, 1, 1, 1, 1);
   const groupRef = useRef<Group>(null);
   const board = [
     [1, 1, 1, 1, 1, 1, 1],
@@ -63,35 +52,53 @@ const SmoothCube = () => {
   const lerpAmount = 0.5;
 
   useFrame(() => {
-    pointer.set(mousePos.x, mousePos.y);
-    raycaster.setFromCamera(pointer, camera);
-
     if (groupRef.current) {
-      const intersects = raycaster.intersectObjects(groupRef.current.children);
-
-      if (intersects[0]) {
-        const cube = intersects[0].object;
-
-        cube.position.y = lerp(cube.position.y, centerHeight, lerpAmount);
-
-        const neighbors = getNeighbors(cube, groupRef.current);
-        neighbors.forEach(
-          (neighbor) =>
-            (neighbor.position.y = lerp(
-              neighbor.position.y,
-              neighborHeight,
-              lerpAmount
-            ))
-        );
+      if (!isLoaded) {
+        let doneLerp = true;
         groupRef.current.children.forEach((child) => {
-          if (child.id !== cube.id && neighbors.indexOf(child) < 0) {
-            child.position.y = lerp(child.position.y, 0, lerpAmount);
+          if (child.position.y >= 0.0005) {
+            doneLerp = false;
           }
         });
-      } else {
-        groupRef.current.children.forEach(
-          (child) => (child.position.y = lerp(child.position.y, 0, lerpAmount))
+
+        if (doneLerp) {
+          setLoaded(true);
+        }
+      }
+
+      if (isLoaded) {
+        pointer.set(mousePos.x, mousePos.y);
+        raycaster.setFromCamera(pointer, camera);
+
+        const intersects = raycaster.intersectObjects(
+          groupRef.current.children
         );
+
+        if (intersects[0]) {
+          const cube = intersects[0].object;
+
+          cube.position.y = lerp(cube.position.y, centerHeight, lerpAmount);
+
+          const neighbors = getNeighbors(cube, groupRef.current);
+          neighbors.forEach(
+            (neighbor) =>
+              (neighbor.position.y = lerp(
+                neighbor.position.y,
+                neighborHeight,
+                lerpAmount
+              ))
+          );
+          groupRef.current.children.forEach((child) => {
+            if (child.id !== cube.id && neighbors.indexOf(child) < 0) {
+              child.position.y = lerp(child.position.y, 0, lerpAmount);
+            }
+          });
+        } else {
+          groupRef.current.children.forEach(
+            (child) =>
+              (child.position.y = lerp(child.position.y, 0, lerpAmount))
+          );
+        }
       }
     }
   });
@@ -108,18 +115,12 @@ const SmoothCube = () => {
         return (
           <>
             {list.map((item, z) => {
-              const currentName = `${x} ${z}`;
               return (
                 item === 1 && (
-                  <mesh
-                    key={currentName}
-                    name={currentName}
-                    position={[1.1 * x, 0, -1.1 * z]}
-                    geometry={geometry}
-                  >
-                    <meshStandardMaterial attach="material" color={0xffffff} />{" "}
-                    )
-                  </mesh>
+                  <Cube
+                    timer={x * 100 + z * 200}
+                    position={new Vector3(1.1 * x, 0, -1.1 * z)}
+                  />
                 )
               );
             })}
