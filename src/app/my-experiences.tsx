@@ -49,33 +49,22 @@ const MyExperiences: React.FC = ({}): JSX.Element => {
           />
         </motion.div>
       </div>
-      <h1 className="mb-5 hidden text-center text-3xl font-black sm:block">
-        My Skills
-      </h1>
+      <motion.h1
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        className="mb-5 hidden text-center text-3xl font-black sm:block"
+      >
+        Tools used in my Projects
+      </motion.h1>
       <div className="grid w-full grid-cols-4 gap-4">
-        <Item
-          key={2}
-          title="TypeScript"
-          imageURL={typescriptLogo}
-          barPercentage={60}
-        />
-        <Item key={3} title="NextJs" imageURL={nextJsIcon} barPercentage={70} />
-        <Item key={4} title="React" imageURL={reactLogo} barPercentage={70} />
-        <Item
-          key={5}
-          title="C-Sharp"
-          imageURL={cSharpLogo}
-          barPercentage={40}
-        />
-        <Item key={6} title="Unity" imageURL={unityLogo} barPercentage={50} />
-        <Item key={7} title="NodeJS" imageURL={nodeJsLogo} barPercentage={50} />
-        <Item key={8} title="Java" imageURL={javaLogo} barPercentage={50} />
-        <Item
-          key={1}
-          title="OutSystems"
-          imageURL={outsystemsIcon}
-          barPercentage={40}
-        />
+        <Item key={1} title="TypeScript" imageURL={typescriptLogo} />
+        <Item key={2} title="NextJs" imageURL={nextJsIcon} />
+        <Item key={3} title="React" imageURL={reactLogo} />
+        <Item key={4} title="C-Sharp" imageURL={cSharpLogo} />
+        <Item key={5} title="Unity" imageURL={unityLogo} />
+        <Item key={6} title="NodeJS" imageURL={nodeJsLogo} />
+        <Item key={7} title="Java" imageURL={javaLogo} />
+        <Item key={8} title="OutSystems" imageURL={outsystemsIcon} />
       </div>
     </div>
   );
