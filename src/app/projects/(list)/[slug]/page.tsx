@@ -10,11 +10,7 @@ export default async function page({ params }: { params: { slug: string } }) {
   return (
     <>
       {/* @ts-expect-error Server Component */}
-      <MDXRemote
-        source={projectContent.content}
-        compiledSource={""}
-        components={components}
-      />
+      <MDXRemote source={projectContent.content} components={components} />
     </>
   );
 }

@@ -23,7 +23,8 @@ const MyExperiences: React.FC = ({}): JSX.Element => {
           className="space-y-2 font-primary"
         >
           <h1 className="text-5xl font-black">
-            Hi! I&apos;m{" "}
+            Hi! I&apos;m
+            <br />
             <span className="text-6x text-primary">
               {"<"}Mohammad Alkhalifah{" />"}
             </span>
