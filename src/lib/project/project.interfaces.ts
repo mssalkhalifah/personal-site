@@ -13,8 +13,11 @@ export interface Project {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    stacks?: Stacks[] | null;
+    stacks: Stacks[];
     postImage: PostImage;
+    startdate: Date;
+    enddate?: Date | null;
+    shortDescription: string
   };
 }
 

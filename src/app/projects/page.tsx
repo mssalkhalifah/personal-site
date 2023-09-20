@@ -29,7 +29,7 @@ export default async function page() {
                   title={project.attributes.title}
                   date={project.attributes.createdAt}
                   description={project.attributes.description}
-                  url={"projects/"}
+                  url={`projects/${project.attributes.slug}`}
                   imageUrl={
                     project.attributes.postImage.data
                       ? `${process.env.imageURL}` +

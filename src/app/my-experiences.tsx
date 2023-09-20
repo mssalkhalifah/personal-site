@@ -22,7 +22,7 @@ const MyExperiences: React.FC = ({}): JSX.Element => {
           whileInView={{ opacity: 1, x: 0 }}
           className="space-y-2 font-primary"
         >
-          <h1 className="text-5xl font-black">
+          <h1 className="text-5xl text-center font-black sm:text-left">
             Hi! I&apos;m
             <br />
             <span className="text-6x text-primary">
@@ -53,7 +53,7 @@ const MyExperiences: React.FC = ({}): JSX.Element => {
       <motion.h1
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        className="mb-5 hidden text-center text-3xl font-black sm:block"
+        className="mb-5 text-center text-3xl font-black"
       >
         Tools used in my Projects
       </motion.h1>
