@@ -1,5 +1,6 @@
 import { Project } from "@/lib/project/project.interfaces";
 import Image from "next/image";
+import Link from "next/link";
 import HorizontalPostCard from "../horizontal/HorizontalPostCard";
 
 export interface ProjectCard {
@@ -66,9 +67,12 @@ const ProjectCard: React.FC<ProjectCard> = ({
         <div className="grid grid-rows-2">
           <p className="text-third">{project.attributes.shortDescription}</p>
           <div className="flex justify-center">
-            <button className="bg-secondary mt-auto px-6 py-1 rounded-md text-lg">
+            <Link
+              className="bg-secondary mt-auto px-6 py-1 rounded-md text-lg hover:cursor-pointer"
+              href={"projects/" + project.attributes.slug}
+            >
               Explore
-            </button>
+            </Link>
           </div>
         </div>
       </div>

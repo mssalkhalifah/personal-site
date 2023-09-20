@@ -26,6 +26,10 @@ module.exports = {
       animation: {
         fadeInUp: "fadeInUp 300ms",
       },
+      screens: {
+        xs: "411px",
+        "2xs": "360px",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

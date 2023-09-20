@@ -5,8 +5,8 @@ export default async function page() {
   const projects = await ProjectController.getAllProjects();
 
   return (
-    <div className="flex h-full w-full justify-center">
-      <div className="mx-4 mb-2 space-y-3 sm:m-0">
+    <div className="relative flex h-full w-full flex-col place-items-center justify-center">
+      <div className="max-w-2xl space-y-4 container">
         {projects.data &&
           projects.data.map((project, index) => {
             let tags: string[] = [];

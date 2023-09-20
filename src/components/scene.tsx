@@ -13,7 +13,7 @@ export default function Scene() {
   const isDebug = true;
 
   return (
-    <Canvas shadows="soft" resize={{ scroll: true }} performance={{ max: 30 }}>
+    <Canvas className="bg-secondary" shadows="soft" resize={{ scroll: true }} performance={{ max: 30 }}>
       <Suspense fallback={"Loading..."}>
         <Configuration />
         <ambientLight intensity={0.5} />
