@@ -1,6 +1,5 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import PlaceholderImage from "../../../../public/thumb_placeholder.jpg";
 
 export interface IHorizontalPostCard {
   title: string;
@@ -32,7 +31,7 @@ const HorizontalPostCard: React.FC<IHorizontalPostCard> = ({
   flip = false,
 }): JSX.Element => {
   return (
-    <div className="relative grid grid-cols-6 bg-secondary rounded-lg m-3 overflow-hidden sm:m-0">
+    <div className="relative grid grid-cols-6 bg-secondary rounded-lg m-3 overflow-hidden transition-all sm:m-0">
       <div className="absolute w-full h-full z-10 bg-secondary/60 block sm:hidden" />
       <Image
         className="object-cover block sm:hidden"
