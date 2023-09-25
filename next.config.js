@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: `${process.env.hostname}`,
+        hostname: "strapi.alkhalifah.dev",
         port: "",
         pathname: "/uploads/**",
       },
