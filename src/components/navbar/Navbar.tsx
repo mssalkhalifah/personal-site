@@ -29,7 +29,7 @@ const Navbar: React.FC<INavbar> = ({}) => {
   }, [pathname]);
 
   return (
-    <nav className="fixed z-20 w-full bg-primary/50 backdrop-blur">
+    <nav className="fixed z-[100] w-full bg-primary/50 backdrop-blur">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">

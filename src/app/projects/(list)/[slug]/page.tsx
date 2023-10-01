@@ -6,7 +6,6 @@ import ProjectController from "@/lib/project/project.controller";
 // const components = { Scene };
 
 export default async function page({ params }: { params: { slug: string } }) {
-  // const projectContent = await getProject(params.slug);
   const project = await ProjectController.getProject(params.slug);
 
   return (
@@ -14,12 +13,13 @@ export default async function page({ params }: { params: { slug: string } }) {
       style={{ animationFillMode: "forwards" }}
       className="animate-fadeInUp opacity-0"
     >
-      {/* @ts-expect-error Server Component */}
-      <MDXRemote source={project?.attributes.content} />
+      {"Hello World"}
     </div>
   );
 }
 
+// {/* @ts-expect-error Server Component */}
+// <MDXRemote source={project?.attributes.content} />
 // <MDXRemote source={projectContent.content} components={components} />
 // export async function generateStaticParams(): Promise<{ slug: string }[]> {
 //   const projectHeads = await getProjectHeads();

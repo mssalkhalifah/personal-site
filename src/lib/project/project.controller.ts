@@ -15,13 +15,12 @@ export default class ProjectController {
     };
 
     if (!process.env.strapi_url) {
-      console.error("strapi_url is undefined");
+      console.error("getAllProjects: strapi_url is undefined");
       return projects;
     }
 
     projects = await fetch(
-      process.env.strapi_url +
-        "projects?sort[0]=id&populate[0]=stacks&populate[1]=postImage",
+      "http://192.168.8.74:1337/api/projects?sort[0]=id&populate[0]=stacks&populate[1]=postImage",
       {
         headers: {
           Authorization: `Bearer ${process.env.strapi_api_key}`,
@@ -29,7 +28,10 @@ export default class ProjectController {
       },
     )
       .then((res) => res.json())
-      .catch((error) => console.log("getAllProjects " + error));
+      .catch((error: TypeError) => {
+        console.log("getAllProjects: \n\t" + error.cause);
+        return [];
+      });
 
     return projects;
   }
@@ -60,7 +62,12 @@ export default class ProjectController {
           Authorization: `Bearer ${process.env.strapi_api_key}`,
         },
       },
-    ).then((res) => res.json());
+    )
+      .then((res) => res.json())
+      .catch((error) => {
+        console.log("getLatestProjects: " + error);
+        return [];
+      });
 
     return projects.data || [];
   }
@@ -79,7 +86,9 @@ export default class ProjectController {
           Authorization: `Bearer ${process.env.strapi_api_key}`,
         },
       },
-    ).then((res) => res.json());
+    )
+      .then((res) => res.json())
+      .catch((error) => console.log("getProject: " + error));
 
     return projects.data ? projects.data[0] : null;
   }

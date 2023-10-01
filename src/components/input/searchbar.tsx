@@ -1,6 +1,7 @@
 "use client";
 
 import useOutsideClick from "@/hooks/useOutsideClick";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { BiSolidUpArrow } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
@@ -39,52 +40,70 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch }) => {
             dropdownClicked ? "rotate-180" : "rotate-0"
           }`}
         />
-        <div
-          className={`absolute bg-third w-fit z-10 top-10 left-0 rounded-lg p-2 space-y-1 shadow-lg animate-fadeInUp ${
-            dropdownClicked && tags ? "block" : "hidden"
-          }`}
-        >
-          {tags &&
-            tags.map((tag, index) => {
-              return (
-                <div
-                  key={index}
-                  onClick={(event) => {
-                    const insertTag = (event.target as HTMLDivElement)
-                      .textContent;
-                    if (selectedTags.indexOf(tag) < 0 && insertTag) {
-                      setSelectedTags([...selectedTags, insertTag]);
-                    }
-                  }}
-                  className="px-1 text-lg w-full cursor-pointer hover:bg-primary hover:rounded-lg"
-                >
-                  {tag}
-                </div>
-              );
-            })}
-        </div>
+        <AnimatePresence>
+          {dropdownClicked && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.2 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.2 }}
+              className="absolute bg-third w-fit z-50 top-10 left-0 rounded-lg p-2 space-y-1 shadow-lg"
+            >
+              {tags &&
+                tags.map((tag, index) => {
+                  return (
+                    <div
+                      key={index}
+                      onClick={(event) => {
+                        const insertTag = (event.target as HTMLDivElement)
+                          .textContent;
+                        if (selectedTags.indexOf(tag) < 0 && insertTag) {
+                          setSelectedTags([...selectedTags, insertTag]);
+                        }
+                      }}
+                      className="px-1 text-lg w-full cursor-pointer hover:bg-primary hover:rounded-lg"
+                    >
+                      {tag}
+                    </div>
+                  );
+                })}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <div className="flex w-full items-center bg-white rounded-r-full overflow-hidden">
-        {selectedTags.map((tag, index) => {
-          return (
-            <div
-              key={index}
-              className="flex items-center bg-gray-500 rounded-full px-2 mx-1 w-fit space-x-1 animate-fadeInUp"
-            >
-              {tag}{" "}
-              <RxCross2
-                onClick={() => {
-                  const tagIndex = selectedTags.indexOf(tag);
-                  const newTags = selectedTags.filter(
-                    (_, index) => index !== tagIndex,
-                  );
-                  setSelectedTags(newTags);
+        <AnimatePresence>
+          {selectedTags.map((tag) => {
+            return (
+              <motion.div
+                key={tag}
+                className="flex items-center bg-gray-500 rounded-full px-2 mx-1 w-fit space-x-1"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{
+                  ease: "linear",
+                  layout: {
+                    type: "tween",
+                    ease: "easeOut"
+                  },
                 }}
-                className="cursor-pointer"
-              />
-            </div>
-          );
-        })}
+                layout
+              >
+                {tag}
+                <RxCross2
+                  onClick={() => {
+                    const tagIndex = selectedTags.indexOf(tag);
+                    const newTags = selectedTags.filter(
+                      (_, index) => index !== tagIndex,
+                    );
+                    setSelectedTags(newTags);
+                  }}
+                  className="cursor-pointer"
+                />
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
         <input
           className="w-full h-full text-fourth outline-none mx-1"
           inputMode="search"

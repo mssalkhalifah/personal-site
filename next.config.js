@@ -6,9 +6,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "strapi.alkhalifah.dev",
-        port: "",
+        protocol: "http",
+        hostname: `${process.env.hostname}`,
+        port: "1337",
         pathname: "/uploads/**",
       },
     ],
