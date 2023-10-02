@@ -19,6 +19,15 @@ interface IProjectContent {
 const projectFolderPath = "public/posts/projects";
 
 export async function getProject(slug: string): Promise<IProjectContent> {
+  const temp = await fetch("https://strapi.alkhalifah.dev/api/projects/1", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${process.env.strapi_api_key}`,
+      "Content-Type": "application/json; charset=utf-8",
+    },
+  });
+  console.log("TESTS \n" + temp);
+
   const fileContent = readFileSync(
     path.join(process.cwd(), projectFolderPath, slug + ".mdx")
   );

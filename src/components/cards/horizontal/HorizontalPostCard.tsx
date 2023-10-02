@@ -1,6 +1,5 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import PlaceholderImage from "../../../../public/thumb_placeholder.jpg";
 
 export interface IHorizontalPostCard {
   title: string;
@@ -15,7 +14,7 @@ export interface IHorizontalPostCard {
 
 const Tag: React.FC<{ title: string }> = ({ title }: { title: string }) => {
   return (
-    <div className="rounded-md border-2 border-solid border-zinc-50 px-2 text-xs text-zinc-50 sm:text-sm md:border-zinc-600 md:text-zinc-600">
+    <div className="rounded-md h-fit border-2 border-solid border-third px-2 text-xs text-third sm:text-sm">
       {title}
     </div>
   );
@@ -32,47 +31,39 @@ const HorizontalPostCard: React.FC<IHorizontalPostCard> = ({
   flip = false,
 }): JSX.Element => {
   return (
-    <div
-      className={`relative flex h-60 w-full md:w-[700px] ${
-        flip && "flex-row-reverse"
-      } overflow-hidden rounded-md bg-zinc-100 text-zinc-50 shadow-lg md:text-zinc-900`}
-    >
+    <div className="relative grid grid-cols-6 bg-secondary rounded-lg m-3 overflow-hidden transition-all sm:m-0">
+      <div className="absolute w-full h-full z-10 bg-secondary/60 block sm:hidden" />
       <Image
-        className="absolute opacity-100 md:opacity-0"
-        src={imageUrl || PlaceholderImage}
-        alt={imageAlt || "placeholder"}
+        className="object-cover block sm:hidden"
+        src={imageUrl}
+        alt={imageAlt}
         fill
       />
-      <div className="absolute z-10 h-full w-full bg-zinc-900/50 md:bg-transparent"></div>
-      <div className="relative hidden h-full w-96 md:inline-block">
+      <div className="relative col-span-2 hidden sm:block">
         <Image
-          className="object-cover"
+          className="absolute object-cover"
+          src={imageUrl}
+          alt={imageAlt}
           fill
-          src={imageUrl || PlaceholderImage}
-          alt={imageAlt || "placeholder"}
         />
       </div>
-      <div className="z-10 mx-2 grid w-full grid-flow-col grid-cols-1 grid-rows-6 p-2">
-        <div className="row-span-2">
-          <h1 className="text-xl font-extrabold sm:text-4xl">{title}</h1>
-          <div className="mt-1 flex space-x-2">
-            {tags.map((tag) => {
-              return <Tag key={tag} title={tag} />;
-            })}
-          </div>
+      <div className="grid grid-rows-8 m-2 col-span-6 z-20 xs:grid-rows-6 sm:col-span-4">
+        <h1 className="text-2xl font-extrabold">{title}</h1>
+        <div className="grid grid-cols-2 text-center gap-2 2xs:grid-cols-3 xs:grid-cols-4">
+          {tags.map((tag, index) => {
+            return <Tag key={index} title={tag} />;
+          })}
         </div>
-        <p className="row-span-3 overflow-hidden text-sm font-medium sm:text-lg">
-          {description}
-        </p>
-        <div className="row-span-1">
-          <div className="mt-1 flex w-full place-items-center justify-between">
-            <Tag title={date} />
-            <Link href={url}>
-              <button className="rounded-md bg-zinc-900 px-2 py-1 text-xs text-zinc-50 shadow-md transition-transform hover:scale-105 sm:text-sm">
-                Read More
-              </button>
-            </Link>
-          </div>
+        <div className="row-span-4 my-1 xs:row-span-3">
+          <p>{description}</p>
+        </div>
+        <div className="row-span-1 flex justify-between items-center space-y-2 flex-col 2xs:flex-row 2x:space-y-0">
+          <Tag title={date} />
+          <Link href={url}>
+            <button className="bg-primary text-secondary px-4 rounded-md w-full 2xs:w-[100px]">
+              Explore
+            </button>
+          </Link>
         </div>
       </div>
     </div>

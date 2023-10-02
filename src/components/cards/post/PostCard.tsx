@@ -14,7 +14,7 @@ export interface IPostCard {
 
 const Tag: React.FC<{ title: string }> = ({ title }: { title: string }) => {
   return (
-    <div className="rounded-md border-2 border-solid border-zinc-600 px-2 text-xs text-zinc-600 xl:text-sm">
+    <div className="rounded-md border-2 border-solid border-third px-2 text-xs text-third xl:text-sm">
       {title}
     </div>
   );
@@ -32,15 +32,18 @@ const PostCard: React.FC<IPostCard> = ({
 }): JSX.Element => {
   return (
     <div
-      className={`h-80 w-full overflow-hidden rounded-lg border-4 shadow-lg ${
-        isSelected ? "border-blue-600" : "border-transparent"
-      } xl:h-96 xl:w-96`}
+      className={`h-60 w-full overflow-hidden rounded-lg border-4 ${
+        isSelected ? "border-fourth" : "border-primary"
+      } xl:h-60 xl:w-96`}
     >
-      <div className="flex h-full w-full flex-col space-y-3 bg-zinc-100 shadow-md">
+      <div className="flex h-60 w-full flex-col space-y-3 bg-secondary text-fourth shadow-md">
         <div className="m-4 h-12 space-y-2">
-          <h1 className="text-xl font-semibold text-zinc-900 xl:text-2xl">
+          <Link
+            href={url}
+            className="text-xl font-semibold underline hover:cursor-pointer xl:text-2xl"
+          >
             {title}
-          </h1>
+          </Link>
           <div className="flex space-x-1">
             {tags?.map((tag, index) => {
               return <Tag key={index} title={tag} />;
@@ -50,39 +53,8 @@ const PostCard: React.FC<IPostCard> = ({
         <div className="relative h-60 w-full">
           <Image src={imageUrl} alt={imageAlt} fill className="object-cover" />
         </div>
-        <div className="mx-4 h-16 overflow-hidden text-xs xl:text-base">
-          <p className="text-zinc-600">{description}</p>
-        </div>
-        <div className="mx-4 flex h-16 place-items-center text-lg font-medium text-purple-600">
-          <Link href={url} className="decoration-2 hover:underline">
-            Read more
-          </Link>
-        </div>
       </div>
     </div>
-    //<div className="relative row-span-2 h-32 overflow-x-hidden xl:h-40">
-    //  <Image
-    //    className="object-cover"
-    //    src={imageUrl || ""}
-    //    alt={imageAlt || ""}
-    //    fill
-    //  />
-    //</div>
-    //<div className="row-span-2 mx-10 grid grid-cols-1 grid-rows-4 space-y-1">
-    //  <div className="row-span-1">
-    //    <h1 className="flex h-full place-items-center text-3xl font-medium text-zinc-900">
-    //      {title}
-    //    </h1>
-    //  </div>
-    //  <div className="row-span-2">
-    //    <div className="hidden h-20 overflow-hidden text-zinc-600 xl:block">
-    //      {description}
-    //    </div>
-    //  </div>
-    //  <div className="row-span-1">
-    //    <p className="text-zinc-600">{date}</p>
-    //  </div>
-    //</div>
   );
 };
 
