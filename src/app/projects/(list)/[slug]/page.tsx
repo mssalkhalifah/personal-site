@@ -13,13 +13,12 @@ export default async function page({ params }: { params: { slug: string } }) {
       style={{ animationFillMode: "forwards" }}
       className="animate-fadeInUp opacity-0"
     >
-      {"Hello World"}
+      {/* @ts-expect-error Server Component */}
+      {project && <MDXRemote source={project.attributes.content} />}
     </div>
   );
 }
 
-// {/* @ts-expect-error Server Component */}
-// <MDXRemote source={project?.attributes.content} />
 // <MDXRemote source={projectContent.content} components={components} />
 // export async function generateStaticParams(): Promise<{ slug: string }[]> {
 //   const projectHeads = await getProjectHeads();
