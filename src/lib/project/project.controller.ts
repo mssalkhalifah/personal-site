@@ -20,7 +20,7 @@ export default class ProjectController {
     }
 
     projects = await fetch(
-      "http://192.168.8.74:1337/api/projects?sort[0]=id&populate[0]=stacks&populate[1]=postImage",
+      `${process.env.strapi_url}projects?sort[0]=id&populate[0]=stacks&populate[1]=postImage`,
       {
         headers: {
           Authorization: `Bearer ${process.env.strapi_api_key}`,
@@ -55,8 +55,7 @@ export default class ProjectController {
     }
 
     projects = await fetch(
-      process.env.strapi_url +
-        `projects?sort[0]=startdate&populate[0]=stacks&populate[1]=postImage&pagination[pageSize]=${numberOfProjects}`,
+      `${process.env.strapi_url}projects?sort[0]=startdate&populate[0]=stacks&populate[1]=postImage&pagination[pageSize]=${numberOfProjects}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.strapi_api_key}`,
@@ -79,8 +78,7 @@ export default class ProjectController {
     }
 
     const projects: Projects = await fetch(
-      process.env.strapi_url +
-        `projects?populate[0]=stacks&populate[1]=postImage&filters[slug][$eq]=${slug}`,
+      `${process.env.strapi_url}projects?populate[0]=stacks&populate[1]=postImage&filters[slug][$eq]=${slug}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.strapi_api_key}`,
