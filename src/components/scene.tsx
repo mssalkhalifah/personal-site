@@ -10,7 +10,7 @@ import SmoothCube from "./three/SmoothCubes";
 import Configuration from "./three/configuration";
 
 export default function Scene() {
-  const isDebug = true;
+  const isDebug = false;
 
   return (
     <Canvas className="bg-secondary" shadows="soft" resize={{ scroll: true }} performance={{ max: 30 }}>
@@ -20,14 +20,14 @@ export default function Scene() {
         <MyPointLightHelper />
         <SmoothCube />
         <Camera />
-        {isDebug ?? (
-          <>
-            <gridHelper />
-            <CameraDebug />
-          </>
-        )}
       </Suspense>
     </Canvas>
     //<PostProcess />
   );
 }
+// {isDebug ?? (
+//   <>
+//     <gridHelper />
+//     <CameraDebug />
+//   </>
+// )}

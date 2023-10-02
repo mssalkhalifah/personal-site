@@ -1,8 +1,8 @@
 services:
   app:
     build: 
-      context: portfolio
-      dockerfile: /portfolio.Dockerfile.dev
+      context: .
+      dockerfile: Dockerfile.dev
     container_name: personal-site-dev
     command: npm run dev
     ports:
