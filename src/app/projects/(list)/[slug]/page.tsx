@@ -19,11 +19,14 @@ export default async function page({ params }: { params: { slug: string } }) {
   );
 }
 
-// <MDXRemote source={projectContent.content} components={components} />
-// export async function generateStaticParams(): Promise<{ slug: string }[]> {
-//   const projectHeads = await getProjectHeads();
-//
-//   return projectHeads.map((head) => ({
-//     slug: head.url,
-//   }));
-// }
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const projects = await ProjectController.getAllProjects();
+
+  if (projects.data) {
+    return projects.data?.map((project) => ({
+      slug: project.attributes.slug,
+    }));
+  }
+
+  return []
+}
