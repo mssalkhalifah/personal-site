@@ -1,43 +1,83 @@
-import Gallary from "@/components/gallary";
+import ProjectCard from "@/components/cards/project2/ProjectCard";
+import { Project } from "@/lib/project/project.interfaces";
 
-/*
-* {
-    "albumId": 1,
-    "id": 1,
-    "title": "accusamus beatae ad facilis cum similique qui sunt",
-    "url": "https://via.placeholder.com/600/92c952",
-    "thumbnailUrl": "https://via.placeholder.com/150/92c952"
-  }
- */
-interface Project {
-  title?: string;
-  imgUrl?: string;
-  date?: string;
+export interface ProjectSection {
+  projects: Project[];
 }
 
-async function getProjects() {
-  const delay = (ms: number): Promise<unknown> => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
+const ProjectSection: React.FC<ProjectSection> = ({
+  projects,
+}): JSX.Element => {
+  return (
+    <>
+      <div className="hidden grid-rows-6 gap-2 max-w-3xl lg:hidden sm:grid">
+        {projects.length > 0 && (
+          <>
+            <div className="row-span-2">
+              {projects.at(0) && (
+                <ProjectCard
+                  key={projects.at(0)!.id}
+                  project={projects.at(0)!}
+                  horizontal={true}
+                />
+              )}
+            </div>
+            {projects.at(1) && projects.at(2) ? (
+              <>
+                <div className="grid grid-cols-2 gap-2 row-span-4">
+                  <ProjectCard
+                    key={projects.at(1)!.id}
+                    project={projects.at(1)!}
+                    horizontal={false}
+                  />
+                  <ProjectCard
+                    key={projects.at(2)!.id}
+                    project={projects.at(2)!}
+                    horizontal={false}
+                  />
+                </div>
+                <div className="row-span-2">
+                  <ProjectCard
+                    key={projects.at(0)!.id}
+                    project={projects.at(0)!}
+                    horizontal={true}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-2 row-span-4">
+                  <ProjectCard
+                    key={projects.at(1)!.id}
+                    project={projects.at(1)!}
+                    horizontal={false}
+                  />
+                  <ProjectCard
+                    key={projects.at(2)!.id}
+                    project={projects.at(2)!}
+                    horizontal={false}
+                  />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        )}
+      </div>
+      <div className="hidden grid-cols-3 gap-2 lg:grid">
+        {projects.map((project, index) => {
+          return (
+            <ProjectCard key={index} project={project} horizontal={false} />
+          );
+        })}
+      </div>
+      <div className="flex flex-col sm:hidden">
+        {projects.map((project, index) => {
+          return (
+            <ProjectCard key={index} project={project} horizontal={true} />
+          );
+        })}
+      </div>
+    </>
+  );
+};
 
-  const res = await fetch("https://jsonplaceholder.typicode.com/photos");
-  const resJson = await res.json();
-  const projects: Project[] = [];
-
-  await delay(1);
-
-  for (let i = 0; i < 10; i++) {
-    projects.push({
-      title: resJson[i].id,
-      imgUrl: resJson[i].thumbnailUrl,
-    });
-  }
-
-  return projects;
-}
-
-export default async function ProjectSection() {
-  const projects = await getProjects();
-
-  return <Gallary projects={projects} />;
-}
+export default ProjectSection;
