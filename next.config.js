@@ -3,13 +3,14 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  output: "standalone",
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: `${process.env.hostname}`,
-        port: "",
-        pathname: "/uploads/**",
+        protocol: process.env.IMAGE_PROTOCOL,
+        hostname: process.env.hostname,
+        port: process.env.IMAGE_PORT,
+        pathname: process.env.IMAGE_PATHNAME,
       },
     ],
   },
