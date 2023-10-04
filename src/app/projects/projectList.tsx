@@ -13,6 +13,7 @@ export interface ProjectList {
 
 const ProjectList: React.FC<ProjectList> = ({ projects, baseImageURL }) => {
   const [searchResult, setSearchResult] = useState<string | null>(null);
+  const [currentSelectedTags, setSelectedTags] = useState<string[]>([]);
   const [projectList, setProjectList] = useState<Project[]>(
     projects.data || [],
   );
@@ -22,26 +23,45 @@ const ProjectList: React.FC<ProjectList> = ({ projects, baseImageURL }) => {
       const title = project.attributes.title.toLowerCase();
       const description = project.attributes.description.toLowerCase();
       const query = searchResult?.toLowerCase();
+      const hasTitle = title.indexOf(query || "") >= 0;
+      const hasDescription = description.indexOf(query || "") >= 0;
 
-      return (
-        query && (title.indexOf(query) >= 0 || description.indexOf(query) >= 0)
-      );
+      return hasTitle || hasDescription;
     };
 
-    if (searchResult && projects.data) {
-      const filteredProjects = projects.data.filter(filterProjects);
+    const filterByStacks = (project: Project) => {
+      const stacks = project.attributes.stacks;
+      const tagFilter = stacks.filter((stack) =>
+        currentSelectedTags.includes(stack.name),
+      );
+
+      return tagFilter.length > 0;
+    };
+
+    if (projects.data && (currentSelectedTags.length > 0 || searchResult)) {
+      let filteredProjects = projects.data
+
+      if (currentSelectedTags.length > 0) {
+        filteredProjects = filteredProjects.filter(filterByStacks);
+      }
+
+      if (searchResult) {
+        filteredProjects = filteredProjects.filter(filterProjects);
+      }
+
       setProjectList(filteredProjects);
     } else {
       setProjectList(projects.data || []);
     }
-  }, [searchResult, projects]);
+  }, [searchResult, projects, currentSelectedTags]);
 
   return (
     <div className="max-w-3xl container mx-auto">
       <div className="mx-2 sm:mx-0">
         <SearchBar
           onSearch={(query) => setSearchResult(query)}
-          tags={["OutSystem", "React"]}
+          onTagSelect={(tags) => setSelectedTags(tags)}
+          tags={["OutSystems", "React", "Json"]}
         />
       </div>
       <ul className="space-y-2 mt-4">

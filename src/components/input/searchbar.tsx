@@ -9,9 +9,10 @@ import { RxCross2 } from "react-icons/rx";
 export interface SearchBar {
   tags?: string[];
   onSearch: (query: string) => void;
+  onTagSelect: (tags: string[]) => void;
 }
 
-const SearchBar: React.FC<SearchBar> = ({ tags, onSearch }) => {
+const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownClicked, setDropdownClick] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -58,6 +59,7 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch }) => {
                           .textContent;
                         if (selectedTags.indexOf(tag) < 0 && insertTag) {
                           setSelectedTags([...selectedTags, insertTag]);
+                          onTagSelect([...selectedTags, insertTag]);
                         }
                       }}
                       className="px-1 text-lg w-full cursor-pointer hover:bg-primary hover:rounded-lg"
@@ -84,7 +86,7 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch }) => {
                   ease: "linear",
                   layout: {
                     type: "tween",
-                    ease: "easeOut"
+                    ease: "easeOut",
                   },
                 }}
                 layout
@@ -97,6 +99,7 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch }) => {
                       (_, index) => index !== tagIndex,
                     );
                     setSelectedTags(newTags);
+                    onTagSelect(newTags);
                   }}
                   className="cursor-pointer"
                 />
