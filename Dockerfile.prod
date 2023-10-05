@@ -16,8 +16,6 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=BUILD --chown=nextjs:nodejs /app/.next/standalone/ ./
 COPY --from=BUILD /app/.next/static ./.next/static
 COPY --from=BUILD /app/public ./public
-# COPY --from=BUILD /app/node_modules ./node_modules
-COPY --from=BUILD /app/.env.local ./
 
 EXPOSE 3000
 
