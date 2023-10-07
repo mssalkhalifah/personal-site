@@ -1,4 +1,3 @@
-import PostList from "@/components/layouts/list/posts/PostList";
 import { IPostCard } from "@/components/cards/post/PostCard";
 import { getProjectHeads } from "@/lib/projects";
 
@@ -22,13 +21,11 @@ export default async function layout({
   });
 
   return (
-    <div className="top-0 left-0 mx-4 grid grid-cols-6 grid-rows-1 gap-4">
-      <div className="col-span-6 lg:col-span-4">
-        <div className="prose prose-lg max-w-none">{children}</div>
-      </div>
-      <div className="hidden lg:col-span-2 lg:block">
-        <PostList postCards={postList} />
-      </div>
+    <div className="container">
+      <div className="prose prose-lg max-w-none">{children}</div>
     </div>
   );
 }
+// <div className="hidden lg:col-span-2 lg:block">
+//   <PostList postCards={postList} />
+// </div>
