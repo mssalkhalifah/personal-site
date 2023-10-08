@@ -15,8 +15,8 @@ export interface Project {
     publishedAt: string;
     stacks: Stacks[];
     postImage: PostImage;
-    startdate: Date;
-    enddate?: Date | null;
+    startdate: string;
+    enddate: string | null;
     shortDescription: string
   };
 }
