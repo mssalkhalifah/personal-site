@@ -13,19 +13,23 @@ export interface Project {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    stacks: Stacks[];
+    stacks: {
+      data: Stacks[];
+    };
     postImage: PostImage;
     startdate: string;
     enddate: string | null;
-    shortDescription: string
+    shortDescription: string;
   };
 }
 
 export interface Stacks {
   id: number;
-  name: string;
-  color: string;
-  source: string;
+  attributes: {
+    name: string;
+    uuid: string;
+    color: string;
+  };
 }
 
 export interface PostImage {

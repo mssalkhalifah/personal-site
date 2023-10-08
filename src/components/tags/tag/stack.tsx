@@ -11,7 +11,7 @@ const Stack: React.FC<IStack> = ({ title, color = "grey" }) => {
     "bg-purple-500",
   ];
   const backgroundColor = colors.find((item) => item.indexOf(color.toLowerCase()) >= 0);
-  return <div className={`${backgroundColor} px-2 text-center rounded-xl`}>{title}</div>;
+  return <div className={`bg-slate-50 px-2 text-center rounded-xl shadow-md`}>{title}</div>;
 };
 
 export default Stack;

@@ -36,9 +36,9 @@ const ProjectList: React.FC<ProjectList> = ({
     };
 
     const filterByStacks = (project: Project) => {
-      const stacks = project.attributes.stacks;
+      const stacks = project.attributes.stacks.data;
       const tagFilter = stacks.filter((stack) =>
-        currentSelectedTags.includes(stack.name),
+        currentSelectedTags.includes(stack.attributes.name),
       );
 
       return tagFilter.length > 0;
@@ -75,8 +75,10 @@ const ProjectList: React.FC<ProjectList> = ({
           {projectList.map((project) => {
             let tags: string[] = [];
 
-            if (project.attributes.stacks) {
-              tags = project.attributes.stacks.map((stack) => stack.name);
+            if (project.attributes.stacks.data) {
+              tags = project.attributes.stacks.data.map(
+                (stack) => stack.attributes.name,
+              );
             }
 
             return (

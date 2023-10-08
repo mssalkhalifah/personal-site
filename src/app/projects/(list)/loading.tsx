@@ -34,7 +34,7 @@ export default function Loading() {
         </div>
       </div>
       <div className="sticky top-16 col-span-3">
-        <div className="flex w-full animate-pulse flex-col justify-center rounded-lg">
+        <div className="flex w-full animate-pulse flex-col justify-center">
           <div className="h-5 w-full bg-zinc-400"></div>
           <div className="h-12 w-full bg-zinc-400 lg:h-28"></div>
         </div>

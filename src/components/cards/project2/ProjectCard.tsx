@@ -46,17 +46,17 @@ const ProjectCard: React.FC<ProjectCard> = ({
       </div>
       <div className="grid grid-rows-3">
         <div className="grid grid-cols-3 row-span-2 text-center gap-2 text-sm my-2">
-          {project.attributes.stacks!.map((stack) => {
+          {project.attributes.stacks.data.map((stack) => {
             return (
               <div
                 key={stack.id}
                 className={`${
-                  stack.color
+                  stack.attributes.color
                     ? "bg-black"
                     : "bg-transparent text-transparent pointer-events-none"
                 } rounded-lg h-fit px-1`}
               >
-                {stack.name}
+                {stack.attributes.name}
               </div>
             );
           })}
