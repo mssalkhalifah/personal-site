@@ -12,6 +12,7 @@ interface Header {
 
 const TableOfContent: React.FC = () => {
   const [toc, setToc] = useState<Header[]>([]);
+  const [isLoaded, setLoaded] = useState(false);
   const [expanded, SetExpanded] = useState(true);
 
   const scrollInto = (id: string) => {
@@ -41,56 +42,60 @@ const TableOfContent: React.FC = () => {
     });
 
     setToc(headings);
+    setLoaded(true);
+    SetExpanded(window.innerWidth > 1024)
   }, []);
 
   return (
-    <div
-      className="absolute top-0 z-50 w-full bg-primary shadow-lg rounded-lg lg:sticky lg:top-16"
-    >
-      <div
-        onClick={() => SetExpanded(!expanded)}
-        className="flex justify-between place-items-center w-full bg-third text-primary px-3 py-2 rounded-lg z-10 cursor-pointer"
-      >
-        <div className="flex font-bold place-items-center">
-          <FaAlignJustify className="mr-2" />
-          <div>
-            <span className="text-2xl">T</span>
-            <span className="text-lg">able of Content</span>
-          </div>
-        </div>
-        <FaArrowCircleDown
-          className={`scale-125 transition-transform ${
-            !expanded && "rotate-180"
-          }`}
-        />
-      </div>
-      <AnimatePresence>
-        <motion.div
-          key={String(expanded)}
-          initial={{ height: 0 }}
-          animate={{ height: "auto" }}
-          exit={{ height: 0 }}
-          className="overflow-hidden"
-        >
-          {expanded && (
-            <div className="p-2">
-              {toc.map((header) => (
-                <div
-                  key={header.title}
-                  onClick={() => scrollInto(header.id)}
-                  className="my-2 transition-colors rounded-md hover:bg-secondary hover:text-primary cursor-pointer"
-                >
-                  <div className="flex place-items-center">
-                    <FaDotCircle className="min-w-[32px]" />{" "}
-                    <span className="mx-1">{header.title}</span>
-                  </div>
-                </div>
-              ))}
+    <>
+      {isLoaded && (
+        <div className="absolute top-0 z-50 w-full bg-primary shadow-lg rounded-lg lg:sticky lg:top-16">
+          <div
+            onClick={() => SetExpanded(!expanded)}
+            className="flex justify-between place-items-center w-full bg-third text-primary px-3 py-2 rounded-lg z-10 cursor-pointer"
+          >
+            <div className="flex font-bold place-items-center">
+              <FaAlignJustify className="mr-2" />
+              <div>
+                <span className="text-2xl">T</span>
+                <span className="text-lg">able of Content</span>
+              </div>
             </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
-    </div>
+            <FaArrowCircleDown
+              className={`scale-125 transition-transform ${
+                !expanded && "rotate-180"
+              }`}
+            />
+          </div>
+          <AnimatePresence>
+            <motion.div
+              key={String(expanded)}
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0 }}
+              className="overflow-hidden"
+            >
+              {expanded && (
+                <div className="p-2">
+                  {toc.map((header) => (
+                    <div
+                      key={header.title}
+                      onClick={() => scrollInto(header.id)}
+                      className="my-2 transition-colors rounded-md hover:bg-secondary hover:text-primary cursor-pointer"
+                    >
+                      <div className="flex place-items-center">
+                        <FaDotCircle className="min-w-[32px]" />{" "}
+                        <span className="mx-1">{header.title}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      )}
+    </>
   );
 };
 

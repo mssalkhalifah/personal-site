@@ -1,11 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import ProjectController from "@/lib/project/project.controller";
 import TableOfContent from "./toc";
-import { Suspense } from "react";
-// import Scene from "@/components/scene";
-// import { getProject, getProjectHeads } from "@/lib/projects";
-
-// const components = { Scene };
 
 export default async function page({ params }: { params: { slug: string } }) {
   const project = await ProjectController.getProject(params.slug);
