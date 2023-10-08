@@ -3,15 +3,21 @@
 import HorizontalPostCard from "@/components/cards/horizontal/HorizontalPostCard";
 import SearchBar from "@/components/input/searchbar";
 import { Project, Projects } from "@/lib/project/project.interfaces";
+import { Stacks } from "@/lib/stack/stack.interfaces";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export interface ProjectList {
   projects: Projects;
+  stacks: Stacks;
   baseImageURL: string;
 }
 
-const ProjectList: React.FC<ProjectList> = ({ projects, baseImageURL }) => {
+const ProjectList: React.FC<ProjectList> = ({
+  projects,
+  baseImageURL,
+  stacks,
+}) => {
   const [searchResult, setSearchResult] = useState<string | null>(null);
   const [currentSelectedTags, setSelectedTags] = useState<string[]>([]);
   const [projectList, setProjectList] = useState<Project[]>(
@@ -39,7 +45,7 @@ const ProjectList: React.FC<ProjectList> = ({ projects, baseImageURL }) => {
     };
 
     if (projects.data && (currentSelectedTags.length > 0 || searchResult)) {
-      let filteredProjects = projects.data
+      let filteredProjects = projects.data;
 
       if (currentSelectedTags.length > 0) {
         filteredProjects = filteredProjects.filter(filterByStacks);
@@ -61,7 +67,7 @@ const ProjectList: React.FC<ProjectList> = ({ projects, baseImageURL }) => {
         <SearchBar
           onSearch={(query) => setSearchResult(query)}
           onTagSelect={(tags) => setSelectedTags(tags)}
-          tags={["OutSystems", "React", "Json"]}
+          tags={stacks.data.map((stack) => stack.attributes.name)}
         />
       </div>
       <ul className="space-y-2 mt-4">
