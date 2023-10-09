@@ -7,7 +7,7 @@ import Cube from "./cube";
 
 const getNeighbors = (
   cube: Object3D<THREE.Event>,
-  grid: Group
+  grid: Group,
 ): Object3D<THREE.Event>[] => {
   const neighbors: Object3D<THREE.Event>[] = [];
   const position = cube.position;
@@ -38,13 +38,15 @@ const SmoothCube = () => {
   const { camera } = useThree();
   const groupRef = useRef<Group>(null);
   const board = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
   ];
   const offset = board.length / 2 / (board.length * 2);
   const centerHeight = 0.3;
@@ -71,7 +73,7 @@ const SmoothCube = () => {
         raycaster.setFromCamera(pointer, camera);
 
         const intersects = raycaster.intersectObjects(
-          groupRef.current.children
+          groupRef.current.children,
         );
 
         if (intersects[0]) {
@@ -85,8 +87,8 @@ const SmoothCube = () => {
               (neighbor.position.y = lerp(
                 neighbor.position.y,
                 neighborHeight,
-                lerpAmount
-              ))
+                lerpAmount,
+              )),
           );
           groupRef.current.children.forEach((child) => {
             if (child.id !== cube.id && neighbors.indexOf(child) < 0) {
@@ -96,7 +98,7 @@ const SmoothCube = () => {
         } else {
           groupRef.current.children.forEach(
             (child) =>
-              (child.position.y = lerp(child.position.y, 0, lerpAmount))
+              (child.position.y = lerp(child.position.y, 0, lerpAmount)),
           );
         }
       }
@@ -118,7 +120,7 @@ const SmoothCube = () => {
               return (
                 item === 1 && (
                   <Cube
-                    timer={x * 100 + z * 200}
+                    timer={Math.random() * 1000}
                     position={new Vector3(1.1 * x, 0, -1.1 * z)}
                   />
                 )

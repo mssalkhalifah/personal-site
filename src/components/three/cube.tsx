@@ -25,7 +25,7 @@ const Cube = (props: Cube) => {
     if (ref.current) {
       const cube = ref.current;
       if (start) {
-        cube.position.y = lerp(cube.position.y, 0, 0.3);
+        cube.position.y = lerp(cube.position.y, 0, 0.37);
       }
     }
   });
