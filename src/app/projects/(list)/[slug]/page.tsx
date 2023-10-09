@@ -32,8 +32,9 @@ export default async function page({ params }: { params: { slug: string } }) {
               </span>
               <div className="flex flex-wrap mt-2 place-items-center">
                 {project.attributes.stacks.data.map((stack) => (
-                  <div className="m-1" key={stack.attributes.uuid}>
+                  <div className="m-1">
                     <Stack
+                      key={stack.attributes.uuid}
                       title={stack.attributes.name}
                       color={stack.attributes.color}
                     />

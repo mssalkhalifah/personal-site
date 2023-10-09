@@ -1,6 +1,6 @@
 "use client";
 
-import HorizontalPostCard from "@/components/cards/horizontal/HorizontalPostCard";
+import HorizontalCard from "@/components/cards/horizontal2/HorizontalCard";
 import SearchBar from "@/components/input/searchbar";
 import { Project, Projects } from "@/lib/project/project.interfaces";
 import { Stacks } from "@/lib/stack/stack.interfaces";
@@ -72,19 +72,15 @@ const ProjectList: React.FC<ProjectList> = ({
       </div>
       <ul className="space-y-2 mt-4">
         <AnimatePresence>
-          {projectList.map((project) => {
-            let tags: string[] = [];
-
-            if (project.attributes.stacks.data) {
-              tags = project.attributes.stacks.data.map(
-                (stack) => stack.attributes.name,
-              );
-            }
+          {projectList.map((project, index) => {
+            const projectImage =
+              project.attributes.postImage.data?.attributes.url;
+            const image = `${baseImageURL}${projectImage}`;
 
             return (
               <motion.li
                 layout
-                key={project.attributes.slug}
+                key={project.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, x: 50 }}
@@ -96,21 +92,17 @@ const ProjectList: React.FC<ProjectList> = ({
                   },
                 }}
               >
-                <HorizontalPostCard
-                  key={project.attributes.slug}
-                  title={project.attributes.title}
-                  date={project.attributes.createdAt}
-                  description={project.attributes.description}
-                  url={`projects/${project.attributes.slug}`}
-                  imageUrl={
-                    project.attributes.postImage.data
-                      ? `${baseImageURL}` +
-                        project.attributes.postImage.data?.attributes.url
-                      : ""
+                <HorizontalCard
+                  image={image}
+                  imageAlt={
+                    project.attributes.postImage.data?.attributes.name || ""
                   }
-                  imageAlt={""}
-                  flip={false}
-                  tags={tags}
+                  title={project.attributes.title}
+                  stacks={project.attributes.stacks}
+                  description={project.attributes.description}
+                  startDate={new Date()}
+                  endDate={new Date()}
+                  projectUrl={`projects/${project.attributes.slug}`}
                 />
               </motion.li>
             );
@@ -122,3 +114,20 @@ const ProjectList: React.FC<ProjectList> = ({
 };
 
 export default ProjectList;
+
+// <HorizontalPostCard
+//   key={project.attributes.slug}
+//   title={project.attributes.title}
+//   date={project.attributes.createdAt}
+//   description={project.attributes.description}
+//   url={`projects/${project.attributes.slug}`}
+//   imageUrl={
+//     project.attributes.postImage.data
+//       ? `${baseImageURL}` +
+//         project.attributes.postImage.data?.attributes.url
+//       : ""
+//   }
+//   imageAlt={""}
+//   flip={false}
+//   tags={tags}
+// />
