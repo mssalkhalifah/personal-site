@@ -4,6 +4,7 @@ import HorizontalCard from "@/components/cards/horizontal2/HorizontalCard";
 import SearchBar from "@/components/input/searchbar";
 import { Project, Projects } from "@/lib/project/project.interfaces";
 import { Stacks } from "@/lib/stack/stack.interfaces";
+import { formatIsoDateString } from "@/utils/date";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -100,8 +101,8 @@ const ProjectList: React.FC<ProjectList> = ({
                   title={project.attributes.title}
                   stacks={project.attributes.stacks}
                   description={project.attributes.description}
-                  startDate={new Date()}
-                  endDate={new Date()}
+                  startDate={project.attributes.startdate}
+                  endDate={project.attributes.enddate}
                   projectUrl={`projects/${project.attributes.slug}`}
                 />
               </motion.li>

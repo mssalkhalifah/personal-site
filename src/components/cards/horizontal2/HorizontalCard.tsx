@@ -1,7 +1,9 @@
 import Stack from "@/components/tags/tag/stack";
 import { Stacks } from "@/lib/stack/stack.interfaces";
+import { formatIsoDateString } from "@/utils/date";
 import Image from "next/image";
 import Link from "next/link";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export interface HorizontalCard {
   image: string;
@@ -9,8 +11,8 @@ export interface HorizontalCard {
   title: string;
   stacks: Stacks;
   description: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate?: string;
   projectUrl: string;
 }
 
@@ -32,7 +34,7 @@ const HorizontalCard: React.FC<HorizontalCard> = ({
       <div className="col-span-2 p-1">
         <Image
           className="rounded-lg"
-          src={image + "?resize=200x200"}
+          src={image + "?resize=500x500"}
           alt={imageAlt}
           width={200}
           height={200}
@@ -46,6 +48,11 @@ const HorizontalCard: React.FC<HorizontalCard> = ({
               <Stack title={stack.attributes.name} />
             </div>
           ))}
+        </div>
+        <div className="flex place-items-center space-x-2 border-b border-b-secondary w-fit">
+          <span>{formatIsoDateString(startDate)}</span>
+          <FaArrowRightLong className="min-w-[16px]" />
+          <span>{endDate ? formatIsoDateString(endDate) : "Present"}</span>
         </div>
         <span>{description}</span>
       </div>
