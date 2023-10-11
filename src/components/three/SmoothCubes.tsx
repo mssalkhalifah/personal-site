@@ -120,6 +120,7 @@ const SmoothCube = () => {
               return (
                 item === 1 && (
                   <Cube
+                    key={`${x}${z}`}
                     timer={Math.random() * 1000}
                     position={new Vector3(1.1 * x, 0, -1.1 * z)}
                   />

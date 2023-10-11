@@ -33,7 +33,6 @@ const Cube = (props: Cube) => {
   return (
     <mesh
       ref={ref}
-      key={cubeName}
       name={cubeName}
       position={[props.position.x, 20, props.position.z]}
       geometry={geometry}

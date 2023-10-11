@@ -13,7 +13,12 @@ export default function Scene() {
   const isDebug = false;
 
   return (
-    <Canvas className="bg-secondary" shadows="soft" resize={{ scroll: true }} performance={{ max: 30 }}>
+    <Canvas
+      className="bg-secondary"
+      shadows="soft"
+      resize={{ scroll: true }}
+      performance={{ max: 30 }}
+    >
       <Suspense fallback={"Loading..."}>
         <Configuration />
         <ambientLight intensity={0.5} />
@@ -25,9 +30,10 @@ export default function Scene() {
     //<PostProcess />
   );
 }
+// <CameraDebug />
 // {isDebug ?? (
 //   <>
 //     <gridHelper />
-//     <CameraDebug />
+
 //   </>
 // )}
