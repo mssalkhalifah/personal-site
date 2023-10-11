@@ -1,7 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import ProjectController from "@/lib/project/project.controller";
 import TableOfContent from "./toc";
-import { Roboto } from "@next/font/google";
+import { Roboto } from "next/font/google";
 import Stack from "@/components/tags/tag/stack";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
