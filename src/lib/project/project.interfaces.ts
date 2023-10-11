@@ -1,5 +1,5 @@
 export interface Projects {
-  data?: Project[] | null;
+  data: Project[];
   meta: Meta;
 }
 

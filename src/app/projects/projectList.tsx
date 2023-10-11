@@ -4,7 +4,6 @@ import HorizontalCard from "@/components/cards/horizontal2/HorizontalCard";
 import SearchBar from "@/components/input/searchbar";
 import { Project, Projects } from "@/lib/project/project.interfaces";
 import { Stacks } from "@/lib/stack/stack.interfaces";
-import { formatIsoDateString } from "@/utils/date";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -73,7 +72,7 @@ const ProjectList: React.FC<ProjectList> = ({
       </div>
       <ul className="space-y-2 mt-4">
         <AnimatePresence>
-          {projectList.map((project, index) => {
+          {projectList.map((project) => {
             const projectImage =
               project.attributes.postImage.data?.attributes.url;
             const image = `${baseImageURL}${projectImage}`;
@@ -115,20 +114,3 @@ const ProjectList: React.FC<ProjectList> = ({
 };
 
 export default ProjectList;
-
-// <HorizontalPostCard
-//   key={project.attributes.slug}
-//   title={project.attributes.title}
-//   date={project.attributes.createdAt}
-//   description={project.attributes.description}
-//   url={`projects/${project.attributes.slug}`}
-//   imageUrl={
-//     project.attributes.postImage.data
-//       ? `${baseImageURL}` +
-//         project.attributes.postImage.data?.attributes.url
-//       : ""
-//   }
-//   imageAlt={""}
-//   flip={false}
-//   tags={tags}
-// />

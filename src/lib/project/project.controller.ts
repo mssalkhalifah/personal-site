@@ -2,24 +2,12 @@ import { Project, Projects } from "./project.interfaces";
 
 export default class ProjectController {
   static async getAllProjects(): Promise<Projects> {
-    let projects = {
-      data: [],
-      meta: {
-        pagination: {
-          page: 0,
-          pageSize: 0,
-          pageCount: 0,
-          total: 0,
-        },
-      },
-    };
-
     if (!process.env.strapi_url) {
       console.error("getAllProjects: strapi_url is undefined");
-      return projects;
+      return this.setDefaultValues(null);
     }
 
-    projects = await fetch(
+    let projects: Projects = await fetch(
       `${process.env.strapi_url}projects?sort[0]=id&populate[0]=stacks&populate[1]=postImage`,
       {
         headers: {
@@ -33,28 +21,16 @@ export default class ProjectController {
         return [];
       });
 
-    return projects;
+    return this.setDefaultValues(projects);
   }
 
   static async getLatestProjects(numberOfProjects: number): Promise<Project[]> {
-    let projects = {
-      data: [],
-      meta: {
-        pagination: {
-          page: 0,
-          pageSize: 0,
-          pageCount: 0,
-          total: 0,
-        },
-      },
-    };
-
     if (!process.env.strapi_url) {
       console.error("strapi_url is undefined");
       return [];
     }
 
-    projects = await fetch(
+    let projects: Projects = await fetch(
       `${process.env.strapi_url}projects?sort[0]=startdate&populate[0]=stacks&populate[1]=postImage&pagination[pageSize]=${numberOfProjects}`,
       {
         headers: {
@@ -65,8 +41,9 @@ export default class ProjectController {
       .then((res) => res.json())
       .catch((error) => {
         console.log("getLatestProjects: " + error);
-        return [];
       });
+
+    projects = this.setDefaultValues(projects);
 
     return projects.data || [];
   }
@@ -88,6 +65,33 @@ export default class ProjectController {
       .then((res) => res.json())
       .catch((error) => console.log("getProject: " + error));
 
-    return projects.data ? projects.data[0] : null;
+    const response = this.setDefaultValues(projects).data[0] || null;
+
+    return response;
+  }
+
+  private static setDefaultValues(projects?: Projects | null): Projects {
+    if (!projects) {
+      projects = {
+        data: [],
+        meta: {
+          pagination: {
+            page: 0,
+            pageSize: 0,
+            pageCount: 0,
+            total: 0,
+          },
+        },
+      };
+
+      return projects;
+    }
+
+    projects.data = projects.data || [];
+    projects.data.forEach((project) => {
+      project.attributes.stacks.data = project.attributes.stacks.data || [];
+    });
+
+    return projects;
   }
 }

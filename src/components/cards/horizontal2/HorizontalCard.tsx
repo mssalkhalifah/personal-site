@@ -12,7 +12,7 @@ export interface HorizontalCard {
   stacks: Stacks;
   description: string;
   startDate: string;
-  endDate?: string;
+  endDate?: string | null;
   projectUrl: string;
 }
 
@@ -43,7 +43,7 @@ const HorizontalCard: React.FC<HorizontalCard> = ({
       <div className="col-span-4 flex flex-col space-y-1">
         <span className="text-2xl font-black">{title}</span>
         <div className="flex flex-wrap">
-          {stacks.data.map((stack) => (
+          {stacks.data && stacks.data.map((stack) => (
             <div className="m-1" key={stack.attributes.uuid}>
               <Stack title={stack.attributes.name} />
             </div>
