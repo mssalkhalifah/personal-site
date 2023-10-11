@@ -17,6 +17,7 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
   const [dropdownClicked, setDropdownClick] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isInputFocused, setInputFocused] = useState(false);
 
   useOutsideClick(dropdownRef, () => setDropdownClick(false));
 
@@ -27,12 +28,12 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
   };
 
   return (
-    <div className="flex h-8 w-full shadow-lg rounded-full">
+    <div className="flex h-8 w-full rounded-full shadow-md">
       <div
         ref={dropdownRef}
         onClick={() => setDropdownClick(!dropdownClicked)}
-        className={`relative flex justify-center items-center px-2 bg-third rounded-l-full cursor-pointer space-x-1 ${
-          dropdownClicked ? "outline-2 outline-blue-500" : ""
+        className={`relative flex justify-center items-center px-2 bg-third rounded-l-full cursor-pointer transition-colors space-x-1 border-2 ${
+          dropdownClicked ? "border-blue-500" : "border-third"
         }`}
       >
         <p className="pointer-events-none select-none opacity-60">Tags</p>
@@ -72,7 +73,11 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
           )}
         </AnimatePresence>
       </div>
-      <div className="flex w-full items-center bg-white rounded-r-full overflow-hidden">
+      <div
+        className={`flex w-full items-center bg-white rounded-r-full overflow-hidden border-2 transition-colors ${
+          isInputFocused ? "border-blue-500" : "border-white"
+        }`}
+      >
         <AnimatePresence>
           {selectedTags.map((tag) => {
             return (
@@ -112,6 +117,8 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
           inputMode="search"
           value={searchQuery}
           onChange={handleInputChange}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
         />
       </div>
     </div>
