@@ -1,3 +1,4 @@
+import HorizontalCard from "@/components/cards/horizontal2/HorizontalCard";
 import Scene from "@/components/scene";
 import ProjectController from "@/lib/project/project.controller";
 import { Project } from "@/lib/project/project.interfaces";
@@ -22,7 +23,23 @@ export default async function Page() {
           <h1 className="text-6xl font-extrabold underline">
             My Latest Projects
           </h1>
-          <ProjectSection projects={projects} />
+          <div className="space-y-2">
+            {projects.map((project) => (
+              <HorizontalCard
+                key={project.id}
+                image={`${process.env.imageURL}${project.attributes.postImage.data?.attributes.url}`}
+                imageAlt={
+                  project.attributes.postImage.data?.attributes.name || ""
+                }
+                title={project.attributes.title}
+                stacks={project.attributes.stacks}
+                description={project.attributes.description}
+                startDate={project.attributes.startdate}
+                endDate={project.attributes.enddate}
+                projectUrl={`projects/${project.attributes.slug}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
