@@ -16,10 +16,11 @@ const MyProfile: React.FC = () => {
   const [fontAnimated, setFontAnimated] = useState(false);
 
   return (
-    <div className="absolute top-32 right-0 left-0 space-x-4 flex place-items-center justify-center">
+    <div className="absolute top-32 right-0 left-0 flex place-items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2 }}
       >
         <Image
           className="rounded-xl hidden sm:block"
@@ -29,15 +30,12 @@ const MyProfile: React.FC = () => {
           height={150}
         />
       </motion.div>
-      <div className="text-center flex flex-col">
+      <div className="text-center flex flex-col mx-0 sm:mx-4">
         <div className="flex flex-col place-items-center self-center sm:flex-row">
           <TypeIt
             options={{
               cursorChar: "",
               speed: 60,
-              afterComplete: (instance: any) => {
-                instance.destroy();
-              },
             }}
           >
             <span className="text-6xl font-black">Hi!</span>
@@ -46,9 +44,8 @@ const MyProfile: React.FC = () => {
             options={{
               cursorChar: "",
               speed: 40,
-              afterComplete: (instance: any) => {
+              afterComplete: () => {
                 setFontAnimated(true);
-                instance.destroy();
               },
             }}
           >

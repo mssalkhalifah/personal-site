@@ -13,23 +13,28 @@ export default function Scene() {
   const isDebug = false;
 
   return (
-    <Canvas
-      className="bg-zinc-50"
-      shadows="soft"
-      resize={{ scroll: true }}
-      performance={{ max: 30 }}
-    >
-      <Suspense fallback={"Loading..."}>
-        <Configuration />
-        <ambientLight intensity={0.5} />
-        <MyPointLightHelper />
-        <SmoothCube />
-        <Camera />
-      </Suspense>
-    </Canvas>
-    //<PostProcess />
+    <div className="relative h-full">
+      <Canvas
+        className=""
+        shadows="soft"
+        resize={{ scroll: true }}
+        performance={{ max: 60 }}
+      >
+        <Suspense fallback={"Loading..."}>
+          <Configuration />
+          <ambientLight intensity={0.5} />
+          <MyPointLightHelper />
+          <SmoothCube />
+          <Camera />
+          <fog attach="fog" args={[0xffffff, 1, 19]} />
+        </Suspense>
+      </Canvas>
+    </div>
+
   );
 }
+//<PostProcess />
+// <CameraDebug />
 // <CameraDebug />
 // {isDebug ?? (
 //   <>
