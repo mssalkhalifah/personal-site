@@ -14,7 +14,7 @@ export default function Scene() {
 
   return (
     <Canvas
-      className="bg-secondary"
+      className="bg-zinc-50"
       shadows="soft"
       resize={{ scroll: true }}
       performance={{ max: 30 }}

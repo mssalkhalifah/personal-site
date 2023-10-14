@@ -76,7 +76,7 @@ const ProjectList: React.FC<ProjectList> = ({
             const projectImage =
               project.attributes.postImage.data?.attributes.url;
             const image = `${baseImageURL}${projectImage}`;
-
+            console.log(projectList.toString());
             return (
               <motion.li
                 layout

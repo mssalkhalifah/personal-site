@@ -8,9 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative top-0 left-0 m-0 h-screen w-screen justify-center overflow-x-hidden bg-primary font-primary text-zinc-50">
+      <body className="relative top-0 left-0 m-0 h-screen w-screen justify-center overflow-x-hidden bg-zinc-200 font-primary text-zinc-950">
         <Navbar />
-        <div className="container mx-auto h-full pt-20">{children}</div>
+        <div className="mx-auto h-full w-full">{children}</div>
       </body>
     </html>
   );
