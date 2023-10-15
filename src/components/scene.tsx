@@ -29,8 +29,8 @@ export default function Scene() {
           <fog attach="fog" args={[0xffffff, 1, 19]} />
         </Suspense>
       </Canvas>
+      <div className="absolute z-10 bg-gradient-to-t from-white from-0% to-transparent w-full to-100% bottom-0 h-[15%]"></div>
     </div>
-
   );
 }
 //<PostProcess />

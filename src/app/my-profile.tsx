@@ -18,6 +18,7 @@ const MyProfile: React.FC = () => {
   return (
     <div className="absolute top-32 right-0 left-0 flex place-items-center justify-center">
       <motion.div
+        layout
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2 }}
