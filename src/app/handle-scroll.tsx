@@ -73,7 +73,12 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
   );
 
   useEffect(() => {
-    window.addEventListener("scrollend", () => (isScrolling.current = false));
+    window.addEventListener("wheel", (event: WheelEvent) => {
+      if (event.deltaY === 0) {
+        console.log("scroll ended");
+        isScrolling.current = false;
+      }
+    });
     const sectionElements = document.querySelectorAll("section");
     sectionElements.forEach((element, index) => {
       element.addEventListener("wheel", (event: WheelEvent) =>

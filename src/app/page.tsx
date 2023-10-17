@@ -11,14 +11,14 @@ export default async function Page() {
   return (
     <div className="overflow-hidden h-full">
       <HandleScroll />
-      <section id={sectionIds[0]} className="relative h-screen overflow-hidden">
+      <section id={sectionIds[0]} className="relative h-full overflow-hidden">
         <Scene />
         <MyProfile />
       </section>
-      <section className="h-screen overflow-hidden bg-red-500">Hello World</section>
-      <section className="h-screen overflow-hidden bg-blue-500"></section>
-      <section className="h-screen overflow-hidden bg-blue-800"></section>
-      <section className="h-screen overflow-hidden bg-blue-100"></section>
+      <section className="h-full overflow-hidden bg-red-500">Hello World</section>
+      <section className="h-full overflow-hidden bg-blue-500"></section>
+      <section className="h-full overflow-hidden bg-blue-800"></section>
+      <section className="h-full overflow-hidden bg-blue-100"></section>
     </div>
   );
 }
