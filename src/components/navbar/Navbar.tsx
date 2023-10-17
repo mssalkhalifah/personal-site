@@ -22,9 +22,9 @@ const Navbar: React.FC<INavbar> = ({}) => {
 
   return (
     <nav
-      className={`fixed z-[100] w-full transition-all ${
+      className={`fixed z-[100] transition-all ${
         isTop
-          ? "bg-transparent"
+          ? "bg-transparent w-full"
           : "bg-gray-400/50 backdrop-blur rounded-full mt-2 mx-[5%] w-[90%]"
       }`}
     >
