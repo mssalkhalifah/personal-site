@@ -1,19 +1,25 @@
 import Scene from "@/components/scene";
 import ProjectController from "@/lib/project/project.controller";
 import { Project } from "@/lib/project/project.interfaces";
+import HandleScroll from "./handle-scroll";
 import MyProfile from "./my-profile";
 
 export default async function Page() {
   const projects: Project[] = await ProjectController.getLatestProjects(6);
+  const sectionIds = ["1", "2", "3"];
 
   return (
-    <>
-      <div className="relative h-full">
+    <div className="overflow-hidden h-full">
+      <HandleScroll />
+      <section id={sectionIds[0]} className="relative h-screen overflow-hidden">
         <Scene />
         <MyProfile />
-      </div>
-      <div className="container h-full"></div>
-    </>
+      </section>
+      <section className="h-screen overflow-hidden bg-red-500">Hello World</section>
+      <section className="h-screen overflow-hidden bg-blue-500"></section>
+      <section className="h-screen overflow-hidden bg-blue-800"></section>
+      <section className="h-screen overflow-hidden bg-blue-100"></section>
+    </div>
   );
 }
 

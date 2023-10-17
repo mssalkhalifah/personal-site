@@ -21,7 +21,7 @@ const MyProfile: React.FC = () => {
         layout
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2 }}
+        transition={{ delay: 1.85 }}
       >
         <Image
           className="rounded-xl hidden sm:block"
