@@ -9,16 +9,16 @@ export default async function Page() {
   const sectionIds = ["1", "2", "3"];
 
   return (
-    <div className="overflow-hidden h-full overscroll-y-none">
+    <div className="overflow-hidden h-full overscroll-none">
       <HandleScroll />
       <section id={sectionIds[0]} className="relative h-full overflow-hidden">
         <Scene />
         <MyProfile />
       </section>
-      <section className="h-full overflow-hidden bg-red-500"></section>
-      <section className="h-full overflow-hidden bg-blue-500"></section>
-      <section className="h-full overflow-hidden bg-blue-800"></section>
-      <section className="h-full overflow-hidden bg-blue-100"></section>
+      <section className="h-full overflow-hidden"></section>
+      <section className="h-full overflow-hidden"></section>
+      <section className="h-full overflow-hidden"></section>
+      <section className="h-full overflow-hidden"></section>
     </div>
   );
 }

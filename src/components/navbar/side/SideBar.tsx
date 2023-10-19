@@ -1,38 +1,43 @@
 "use client";
 
-import HorizontalPostCard from "@/components/cards/horizontal/HorizontalPostCard";
-import { IPostCard } from "@/components/cards/post/PostCard";
-import PostList from "@/components/layouts/list/posts/PostList";
-import { useState } from "react";
+import { stagger, useAnimate } from "framer-motion";
+import { useEffect } from "react";
 
-export interface ISidebar {
-  items: IPostCard[];
+interface ISidebar {
+  isOpen: boolean;
 }
 
-const Sidebar: React.FC<ISidebar> = ({ items }): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
+  const [scope, animate] = useAnimate();
+  const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 
-  const toggleSidebar = (): void => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    animate("#sidebar", isOpen ? { x: 0 } : { x: "-100%" }, {
+      duration: 0.3,
+      type: "tween",
+    });
+
+    animate("li", isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }, {
+      duration: 0.2,
+      delay: isOpen ? staggerMenuItems : 0,
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   return (
-    <div className="fixed inset-y-0 left-0 z-10 mt-10 h-full w-full -translate-x-0 backdrop-blur">
-      <div className="mx-auto h-full max-w-2xl space-y-2">
-        {items.map((item, index) => {
-          return (
-            <HorizontalPostCard
-              key={index}
-              title={item.title!}
-              date={item.date!}
-              tags={[]}
-              description={item.description!}
-              url={item.url!}
-              imageUrl={item.imageUrl!}
-              imageAlt={item.imageAlt!}
-            />
-          );
-        })}
+    <div ref={scope}>
+      <div
+        id="sidebar"
+        className="block absolute top-0 h-screen w-[75%] bg-gray-300 shadow-md sm:hidden"
+      >
+        <ul className="pt-20 mx-6 space-y-4 flex flex-col">
+          <li>PROJECTS</li>
+          <li>PROJECTS</li>
+          <li>PROJECTS</li>
+          <li>PROJECTS</li>
+          <li>PROJECTS</li>
+        </ul>
       </div>
     </div>
   );

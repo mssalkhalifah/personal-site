@@ -1,7 +1,6 @@
 "use client";
 
-import { dir } from "console";
-import { useTh } from "leva/dist/declarations/src/styles";
+import { motion } from "framer-motion";
 import { DependencyList, useEffect, useMemo, useRef, useState } from "react";
 
 interface IHandleScroll {}
@@ -43,6 +42,8 @@ function throttle<Args extends unknown[]>(
 const HandleScroll: React.FC<IHandleScroll> = () => {
   const isScrolling = useRef<boolean>(false);
   const touchStartY = useRef<number>(0);
+  const [totalSections, setTotalSections] = useState(0);
+  const [currentSection, setCurrentSection] = useState(0);
   function useThrottle<Args extends unknown[]>(
     cb: (...args: Args) => void,
     cooldown: number,
@@ -67,25 +68,16 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
 
     if (direction > 0 && nextElement) {
       nextElement.scrollIntoView({ behavior: "smooth" });
+      setCurrentSection(index + 1);
     }
 
     if (direction < 0 && prevElement) {
       prevElement.scrollIntoView({ behavior: "smooth" });
+      setCurrentSection(index - 1);
     }
 
     touchStartY.current = 0;
   };
-
-  var ignore = false;
-  function endScrolling() {
-    if (ignore) {
-      return;
-    }
-    ignore = true;
-    setTimeout(() => (ignore = false), 600);
-    console.log("scroll ended");
-    isScrolling.current = false;
-  }
 
   const handleScrolling = useThrottle(
     (index: number, elements: NodeListOf<HTMLElement>, direction: number) => {
@@ -99,10 +91,25 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
   );
 
   useEffect(() => {
+    document.querySelector("body")!.classList.add("overscroll-none");
+
+    var ignore = false;
+    function endScrolling() {
+      if (ignore) {
+        return;
+      }
+      ignore = true;
+      setTimeout(() => (ignore = false), 600);
+      console.log("scroll ended");
+      isScrolling.current = false;
+    }
+
     window.addEventListener("wheel", () => endScrolling());
     window.addEventListener("touchend", () => endScrolling());
 
     const sectionElements = document.querySelectorAll("section");
+    setTotalSections(sectionElements.length);
+
     sectionElements.forEach((element, index) => {
       element.addEventListener("wheel", (event: WheelEvent) =>
         handleScrolling(index, sectionElements, event.deltaY),
@@ -118,6 +125,7 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
     });
 
     return () => {
+      document.querySelector("body")!.classList.remove("overscroll-none");
       window.removeEventListener("wheel", () => endScrolling);
       window.removeEventListener("touchend", () => endScrolling);
       window.removeEventListener("touchstart", (event: TouchEvent) => {
@@ -136,7 +144,21 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
     };
   }, [handleScrolling]);
 
-  return <div className="absolute"></div>;
+  return (
+    <div className="absolute flex flex-col justify-center place-items-end right-0 top-0 bottom-0 z-50">
+      {Array.from(Array(totalSections), (_, index) => {
+        return (
+          <motion.div
+            layout
+            key={index}
+            className={`w-2 bg-black m-1 rounded-full overflow-hidden text-white ${
+              currentSection === index ? "h-7" : "h-4"
+            }`}
+          ></motion.div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default HandleScroll;

@@ -39,7 +39,7 @@ const MyProfile: React.FC = () => {
               speed: 60,
             }}
           >
-            <span className="text-6xl font-black">Hi!</span>
+            <span className="text-4xl sm:text-6xl font-black">Hi!</span>
           </TypeIt>
           <TypeIt
             options={{
@@ -58,7 +58,7 @@ const MyProfile: React.FC = () => {
           </TypeIt>
         </div>
         <span
-          className={`text-4xl delay-75 ${
+          className={`text-2xl sm:text-4xl delay-75 ${
             fontAnimated
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-5"
@@ -67,7 +67,7 @@ const MyProfile: React.FC = () => {
           {" I'm Mohammad Alkhalifah"}
         </span>
         <span
-          className={`text-4xl delay-200 ${
+          className={`text-2xl sm:text-4xl delay-200 ${
             fontAnimated
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-5"
