@@ -1,7 +1,7 @@
 "use client";
 
 import useScrollPosition from "@/hooks/useScrollPosition";
-import profile from "../../../public/profile.png";
+import profile from "../../../public/Profile.png";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,10 +27,11 @@ const Navbar: React.FC<INavbar> = ({}) => {
 
   return (
     <nav
+      id="navbar"
       className={`fixed z-[100] transition-all ${
         isTop
-          ? "bg-transparent w-full"
-          : "bg-gray-300/50 w-full backdrop-blur sm:rounded-full sm:mt-2 sm:mx-[3%] sm:w-[94%]"
+          ? "bg-transparent w-screen"
+          : "bg-gray-300/50 w-screen backdrop-blur sm:rounded-full sm:mt-2 sm:mx-[3%] sm:w-[94%]"
       }`}
     >
       <div className="container mx-auto py-2">
@@ -46,7 +47,7 @@ const Navbar: React.FC<INavbar> = ({}) => {
             <span className="text-black text-3xl">M</span>
             <span className="text-xl">ssalkhalifah</span>
           </Link>
-          <Link href={"projects"}>
+          <Link href={"/projects"}>
             <span
               className={`hidden mx-6 w-fit px-2 py-1 transition-all sm:block ${
                 isProjectsPage
@@ -59,7 +60,7 @@ const Navbar: React.FC<INavbar> = ({}) => {
           </Link>
           <button
             onClick={() => setDropdownClicked(!isDropdownClicked)}
-            className="block p-2 bg-gray-50 shadow-md w-[50px] h-[50px] rounded-xl sm:hidden"
+            className="block p-2 bg-gray-50 shadow-md w-[50px] h-[50px] z-50 rounded-xl sm:hidden"
           >
             <HiMiniQueueList className="mx-auto w-[25px] h-[25px]" />
           </button>

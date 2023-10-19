@@ -1,7 +1,9 @@
 "use client";
 
 import { stagger, useAnimate } from "framer-motion";
+import Link from "next/link";
 import { useEffect } from "react";
+import { MdHome, MdLogoDev } from "react-icons/md";
 
 interface ISidebar {
   isOpen: boolean;
@@ -17,26 +19,71 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
       type: "tween",
     });
 
+    animate(
+      document.getElementById("mainDiv")!,
+      isOpen
+        ? {
+            x: "65%",
+            y: "25%",
+            position: "absolute",
+            overflowY: "hidden",
+            height: "70%",
+            borderRadius: "40px",
+            background: "white",
+          }
+        : {
+            x: 0,
+            y: 0,
+            overflowY: "",
+            height: "",
+            position: "",
+            borderRadius: "",
+            background: "",
+          },
+      { duration: 0.2, type: "tween" },
+    );
+
+    if (isOpen) {
+      document.querySelector("html")?.classList.add("overflow-hidden");
+      document.querySelector("body")!.style.background = "#262628";
+    } else {
+      document.querySelector("html")?.classList.remove("overflow-hidden");
+      document.querySelector("body")!.style.background = "";
+    }
+
     animate("li", isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }, {
-      duration: 0.2,
+      duration: 0.4,
       delay: isOpen ? staggerMenuItems : 0,
+      type: "spring",
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
-    <div ref={scope}>
-      <div
-        id="sidebar"
-        className="block absolute top-0 h-screen w-[75%] bg-gray-300 shadow-md sm:hidden"
-      >
-        <ul className="pt-20 mx-6 space-y-4 flex flex-col">
-          <li>PROJECTS</li>
-          <li>PROJECTS</li>
-          <li>PROJECTS</li>
-          <li>PROJECTS</li>
-          <li>PROJECTS</li>
+    <div
+      ref={scope}
+      style={
+        {
+          /* position: "absolute", overflowY: "hidden", height: "60%" */
+        }
+      }
+    >
+      <div id="sidebar" className="block absolute top-0 sm:hidden">
+        <ul className="ml-9 space-y-4 flex flex-col justify-center text-xl text-gray-100 h-screen">
+          <li>
+            <Link href={"/"} className="flex space-x-1 place-items-center">
+              <MdHome /> <span>Home</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href={"/projects"}
+              className="flex space-x-1 place-items-center"
+            >
+              <MdLogoDev /> <span>Projects</span>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
