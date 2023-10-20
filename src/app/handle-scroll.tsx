@@ -182,7 +182,7 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
           <motion.div
             layout
             key={index}
-            className={`w-2 bg-black m-1 rounded-full overflow-hidden text-white ${
+            className={`w-2 bg-black m-1 rounded-full overflow-hidden dark:bg-zinc-700 ${
               currentSection === index ? "h-7" : "h-4"
             }`}
           ></motion.div>

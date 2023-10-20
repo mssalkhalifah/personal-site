@@ -1,6 +1,8 @@
 "use client";
 
+import ToggleDark from "@/components/themes/ToggleDark";
 import { stagger, useAnimate } from "framer-motion";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect } from "react";
 import { MdHome, MdLogoDev } from "react-icons/md";
@@ -11,6 +13,7 @@ interface ISidebar {
 
 const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
   const [scope, animate] = useAnimate();
+  const { theme } = useTheme();
   const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
               overflowY: "hidden",
               height: "70%",
               borderRadius: "40px",
-              background: "white",
+              background: theme === "light" ? "white" : "black",
               pointerEvents: "none",
               touchAction: "none",
             }
@@ -54,12 +57,15 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
 
     const themeColorMeta = document.querySelector('meta[name="theme-color"]');
     if (isOpen) {
-      themeColorMeta?.setAttribute("content", "#262628")
+      themeColorMeta?.setAttribute("content", "#262628");
       document.querySelector("html")?.classList.add("overflow-hidden");
       document.querySelector("body")!.style.background = "#262628";
       mainDivElement?.classList.add("sidebar");
     } else {
-      themeColorMeta?.setAttribute("content", "#ffffff")
+      themeColorMeta?.setAttribute(
+        "content",
+        theme === "light" ? "white" : "black",
+      );
       document.querySelector("html")?.classList.remove("overflow-hidden");
       document.querySelector("body")!.style.background = "";
       mainDivElement?.classList.remove("sidebar");
@@ -72,7 +78,7 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [isOpen, theme]);
 
   return (
     <div
@@ -98,6 +104,9 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
               <MdLogoDev /> <span>Projects</span>
             </Link>
           </li>
+          <div className="absolute w-fit bottom-40">
+            <ToggleDark />
+          </div>
         </ul>
       </div>
     </div>

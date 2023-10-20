@@ -4,14 +4,11 @@ export interface IStack {
 }
 
 const Stack: React.FC<IStack> = ({ title, color = "grey" }) => {
-  const colors = [
-    "bg-red-500, bg-green-500, bg-black, bg-yellow-500",
-    "bg-blue-500",
-    "bg-white",
-    "bg-purple-500",
-  ];
-  const backgroundColor = colors.find((item) => item.indexOf(color.toLowerCase()) >= 0);
-  return <div className={`bg-slate-50 px-2 text-center rounded-xl shadow-md`}>{title}</div>;
+  return (
+    <div className="bg-zinc-50 px-2 text-center rounded-xl shadow-md dark:bg-zinc-600">
+      {title}
+    </div>
+  );
 };
 
 export default Stack;

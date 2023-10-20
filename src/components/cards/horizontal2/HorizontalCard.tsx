@@ -27,13 +27,13 @@ const HorizontalCard: React.FC<HorizontalCard> = ({
   projectUrl,
 }) => {
   return (
-    <div className="bg-primary shadow-lg p-2 text-secondary rounded-xl transition-transform hover:sm:scale-105 pointer-events-none">
+    <div className="shadow-lg p-2 dark:bg-zinc-900 rounded-xl transition-all hover:sm:scale-105 pointer-events-none">
       <Link
         className="flex max-w-3xl flex-col sm:pointer-events-auto sm:flex-row"
         href={projectUrl}
       >
         <Image
-          className="rounded-lg mx-auto hidden sm:block sm:mr-3"
+          className="rounded-lg hidden sm:block sm:mr-3"
           src={image + "?resize=500x500"}
           alt={imageAlt}
           width={200}
@@ -66,7 +66,7 @@ const HorizontalCard: React.FC<HorizontalCard> = ({
       </Link>
       <Link
         href={projectUrl}
-        className="block text-center cursor-pointer bg-secondary w-full text-primary px-2 py-1 rounded-xl shadow-md text-lg transition-transform hover:scale-[1.02] pointer-events-auto sm:hidden"
+        className="block text-center cursor-pointer bg-zinc-100 dark:bg-zinc-800 w-full px-2 py-1 rounded-xl shadow-md text-lg hover:scale-[1.02] pointer-events-auto sm:hidden"
       >
         Read more
       </Link>

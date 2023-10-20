@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Pixelify_Sans } from "next/font/google";
 import profile from "../../public/Profile.png";
 import { motion } from "framer-motion";
-// import TypeIt from "typeit-react";
 import TypeIt from "typeit";
 import { useEffect, useRef, useState } from "react";
 

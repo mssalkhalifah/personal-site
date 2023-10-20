@@ -49,10 +49,10 @@ const TableOfContent: React.FC = () => {
   return (
     <>
       {isLoaded && (
-        <div className="absolute top-0 z-50 w-full bg-primary shadow-lg rounded-lg lg:sticky lg:top-16">
+        <div className="absolute top-0 z-50 w-full bg-zinc-50 dark:bg-zinc-800 shadow-lg rounded-lg lg:sticky lg:top-20">
           <div
             onClick={() => SetExpanded(!expanded)}
-            className="flex justify-between place-items-center w-full bg-third text-primary px-3 py-2 rounded-lg z-10 cursor-pointer"
+            className="flex justify-between place-items-center w-full px-3 py-2 rounded-lg z-10 cursor-pointer bg-zinc-800 dark:bg-zinc-900 text-zinc-50"
           >
             <div className="flex font-bold place-items-center">
               <FaAlignJustify className="mr-2" />
@@ -81,7 +81,7 @@ const TableOfContent: React.FC = () => {
                     <div
                       key={header.title}
                       onClick={() => scrollInto(header.id)}
-                      className="my-2 transition-colors rounded-md hover:bg-secondary hover:text-primary cursor-pointer"
+                      className="my-2 transition-colors rounded-md hover:bg-zinc-500 hover:text-zinc-50 cursor-pointer"
                     >
                       <div className="flex place-items-center">
                         <FaDotCircle className="min-w-[32px]" />{" "}

@@ -5,7 +5,7 @@ export default async function layout({
 }) {
   return (
     <div className="container">
-      <div className="prose prose-lg max-w-none">{children}</div>
+      <div className="prose prose-lg dark:prose-invert dark:prose-pre:bg-zinc-800 max-w-none">{children}</div>
     </div>
   );
 }
