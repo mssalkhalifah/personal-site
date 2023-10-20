@@ -104,9 +104,9 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
               <MdLogoDev /> <span>Projects</span>
             </Link>
           </li>
-          <div className="absolute w-fit bottom-40">
+          <li>
             <ToggleDark />
-          </div>
+          </li>
         </ul>
       </div>
     </div>

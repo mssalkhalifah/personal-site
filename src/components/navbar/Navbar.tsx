@@ -32,12 +32,12 @@ const Navbar: React.FC<INavbar> = ({}) => {
       id="navbar"
       className={`fixed z-[100] transition-all ${
         isTop
-          ? "bg-transparent w-screen"
-          : "w-screen backdrop-blur sm:bg-zinc-900/70 sm:rounded-full sm:mt-2 sm:mx-[3%] sm:w-[94%]"
+          ? "bg-transparent w-screen px-4"
+          : "w-screen backdrop-blur lg:bg-zinc-900/70 px-4 lg:rounded-full lg:mt-2 lg:mx-[2%] lg:w-[96%]"
       }`}
     >
       <div className="container mx-auto py-2">
-        <div className="flex place-items-center justify-between mx-2">
+        <div className="flex place-items-center justify-between">
           <div className="flex place-items-center w-full">
             <Image
               className="block rounded-xl shadow-md sm:hidden z-50"
