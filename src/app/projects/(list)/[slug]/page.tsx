@@ -1,4 +1,4 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { serialize } from "next-mdx-remote/serialize";
 import ProjectController from "@/lib/project/project.controller";
 import TableOfContent from "./toc";
 import { Roboto } from "next/font/google";
@@ -6,6 +6,7 @@ import Stack from "@/components/tags/tag/stack";
 import Image from "next/image";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { formatIsoDateString } from "@/utils/date";
+import MDXContent from "./MDXContent";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -14,6 +15,7 @@ const roboto = Roboto({
 
 export default async function page({ params }: { params: { slug: string } }) {
   const project = await ProjectController.getProject(params.slug);
+  const source = await serialize(project?.attributes.content || "");
   const imageURL =
     process.env.imageURL +
     (project?.attributes.postImage.data?.attributes.url || "");
@@ -60,8 +62,7 @@ export default async function page({ params }: { params: { slug: string } }) {
                 height={300}
                 width={1000}
               />
-              {/* @ts-expect-error Server Component */}
-              {project && <MDXRemote source={project.attributes.content} />}
+              {project && <MDXContent source={source} />}
             </div>
             <div className="sticky top-16 col-span-3">
               <TableOfContent />
