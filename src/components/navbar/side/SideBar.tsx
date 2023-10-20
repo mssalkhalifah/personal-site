@@ -52,11 +52,14 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
       );
     }
 
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
     if (isOpen) {
+      themeColorMeta?.setAttribute("content", "#262628")
       document.querySelector("html")?.classList.add("overflow-hidden");
       document.querySelector("body")!.style.background = "#262628";
       mainDivElement?.classList.add("sidebar");
     } else {
+      themeColorMeta?.setAttribute("content", "#ffffff")
       document.querySelector("html")?.classList.remove("overflow-hidden");
       document.querySelector("body")!.style.background = "";
       mainDivElement?.classList.remove("sidebar");
