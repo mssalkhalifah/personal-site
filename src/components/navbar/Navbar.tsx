@@ -31,7 +31,7 @@ const Navbar: React.FC<INavbar> = ({}) => {
       className={`fixed z-[100] transition-all ${
         isTop
           ? "bg-transparent w-screen"
-          : "bg-gray-300/50 w-screen backdrop-blur sm:rounded-full sm:mt-2 sm:mx-[3%] sm:w-[94%]"
+          : "bg-white w-screen backdrop-blur sm:bg-gray-700/70 sm:rounded-full sm:mt-2 sm:mx-[3%] sm:w-[94%]"
       }`}
     >
       <div className="container mx-auto py-2">
@@ -43,9 +43,14 @@ const Navbar: React.FC<INavbar> = ({}) => {
             width={50}
             height={50}
           />
-          <Link href={"/"} className="mx-auto z-50 sm:mx-0">
-            <span className="text-black text-3xl">M</span>
-            <span className="text-xl">ssalkhalifah</span>
+          <Link
+            href={"/"}
+            className={`mx-auto z-50 transition-colors sm:mx-0 ${
+              isTop ? "text-black" : "text-black sm:text-gray-200"
+            }`}
+          >
+            <span className="font-black text-3xl">M</span>
+            <span className="font-semibold text-xl">SSALKHALIFAH</span>
           </Link>
           <Link href={"/projects"}>
             <span

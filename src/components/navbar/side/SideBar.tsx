@@ -19,36 +19,47 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen }): JSX.Element => {
       type: "tween",
     });
 
-    animate(
-      document.getElementById("mainDiv")!,
-      isOpen
-        ? {
-            x: "65%",
-            y: "25%",
-            position: "absolute",
-            overflowY: "hidden",
-            height: "70%",
-            borderRadius: "40px",
-            background: "white",
-          }
-        : {
-            x: 0,
-            y: 0,
-            overflowY: "",
-            height: "",
-            position: "",
-            borderRadius: "",
-            background: "",
-          },
-      { duration: 0.2, type: "tween" },
-    );
+    let mainDivElement: HTMLElement | null = null;
+
+    if (document.getElementById("mainDiv")) {
+      mainDivElement = document.getElementById("mainDiv")!;
+      animate(
+        mainDivElement,
+        isOpen
+          ? {
+              x: "65%",
+              y: "25%",
+              position: "absolute",
+              overflowY: "hidden",
+              height: "70%",
+              borderRadius: "40px",
+              background: "white",
+              pointerEvents: "none",
+              touchAction: "none",
+            }
+          : {
+              x: 0,
+              y: 0,
+              overflowY: "",
+              height: "",
+              position: "",
+              borderRadius: "0",
+              background: "",
+              pointerEvents: "",
+              touchAction: "",
+            },
+        { duration: 0.2, type: "tween" },
+      );
+    }
 
     if (isOpen) {
       document.querySelector("html")?.classList.add("overflow-hidden");
       document.querySelector("body")!.style.background = "#262628";
+      mainDivElement?.classList.add("sidebar");
     } else {
       document.querySelector("html")?.classList.remove("overflow-hidden");
       document.querySelector("body")!.style.background = "";
+      mainDivElement?.classList.remove("sidebar");
     }
 
     animate("li", isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }, {

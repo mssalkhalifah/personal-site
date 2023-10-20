@@ -42,8 +42,10 @@ function throttle<Args extends unknown[]>(
 const HandleScroll: React.FC<IHandleScroll> = () => {
   const isScrolling = useRef<boolean>(false);
   const touchStartY = useRef<number>(0);
+  const canScroll = useRef<boolean>(true);
   const [totalSections, setTotalSections] = useState(0);
   const [currentSection, setCurrentSection] = useState(0);
+
   function useThrottle<Args extends unknown[]>(
     cb: (...args: Args) => void,
     cooldown: number,
@@ -81,7 +83,7 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
 
   const handleScrolling = useThrottle(
     (index: number, elements: NodeListOf<HTMLElement>, direction: number) => {
-      if (!isScrolling.current) {
+      if (!isScrolling.current && canScroll.current) {
         handleScroll(index, elements, direction);
         isScrolling.current = true;
       }
@@ -89,6 +91,35 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
     600,
     [],
   );
+
+  useEffect(() => {
+    const mainDiv = document.getElementById("mainDiv");
+
+    const observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "class" &&
+          mainDiv
+        ) {
+          console.log("Has Sidebar: ", mainDiv.classList.contains("sidebar"));
+          canScroll.current = !mainDiv.classList.contains("sidebar");
+        }
+      }
+    });
+
+    if (mainDiv) {
+      const observerConfig: MutationObserverInit = {
+        attributes: true,
+        attributeFilter: ["class"],
+        subtree: false,
+      };
+
+      observer.observe(mainDiv, observerConfig);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     document.querySelector("body")!.classList.add("overscroll-none");
