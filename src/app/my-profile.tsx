@@ -4,8 +4,9 @@ import Image from "next/image";
 import { Pixelify_Sans } from "next/font/google";
 import profile from "../../public/Profile.png";
 import { motion } from "framer-motion";
-import TypeIt from "typeit-react";
-import { useState } from "react";
+// import TypeIt from "typeit-react";
+import TypeIt from "typeit";
+import { useEffect, useRef, useState } from "react";
 
 const pixelifySans = Pixelify_Sans({
   subsets: ["latin"],
@@ -13,15 +14,36 @@ const pixelifySans = Pixelify_Sans({
 });
 
 const MyProfile: React.FC = () => {
+  const canAnimate = useRef<boolean>(true);
   const [fontAnimated, setFontAnimated] = useState(false);
+
+  useEffect(() => {
+    if (canAnimate.current) {
+      canAnimate.current = false;
+      // @ts-ignore
+      new TypeIt("#hiSpan", {
+        speed: 35,
+        cursor: false,
+        afterComplete: () => setFontAnimated(true),
+      })
+        .type('<span class="text-4xl sm:text-6xl font-black">Hi!</span>')
+        .type(
+          `<span class="text-3xl m-2 justify-self-center ${pixelifySans.className}">&lt;welcome to my site! /&gt;</span>`,
+        )
+        .go();
+    }
+  }, []);
 
   return (
     <div className="absolute top-32 right-0 left-0 flex place-items-center justify-center">
       <motion.div
         layout
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.85 }}
+        initial={false}
+        animate={fontAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{
+          delay: 0.5,
+          type: "tween",
+        }}
       >
         <Image
           className="rounded-xl hidden sm:block"
@@ -32,49 +54,26 @@ const MyProfile: React.FC = () => {
         />
       </motion.div>
       <div className="text-center flex flex-col mx-0 sm:mx-4">
-        <div className="flex flex-col place-items-center self-center sm:flex-row">
-          <TypeIt
-            options={{
-              cursorChar: "",
-              speed: 60,
-            }}
-          >
-            <span className="text-4xl sm:text-6xl font-black">Hi!</span>
-          </TypeIt>
-          <TypeIt
-            options={{
-              cursorChar: "",
-              speed: 40,
-              afterComplete: () => {
-                setFontAnimated(true);
-              },
-            }}
-          >
-            <span
-              className={`text-3xl m-2 justify-self-center ${pixelifySans.className}`}
-            >
-              {"<welcome to my site! />"}
-            </span>
-          </TypeIt>
-        </div>
-        <span
-          className={`text-2xl sm:text-4xl delay-75 ${
-            fontAnimated
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-          } transition-all font-bold`}
+        <div
+          id="hiSpan"
+          className="flex flex-col place-items-center self-center sm:flex-row"
+        ></div>
+        <motion.span
+          initial={false}
+          animate={fontAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ type: "tween" }}
+          className={"text-2xl sm:text-4xl font-bold"}
         >
           {" I'm Mohammad Alkhalifah"}
-        </span>
-        <span
-          className={`text-2xl sm:text-4xl delay-200 ${
-            fontAnimated
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-          } transition-all font-bold`}
+        </motion.span>
+        <motion.span
+          initial={false}
+          animate={fontAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ delay: 0.2, type: "tween" }}
+          className={"text-2xl sm:text-4xl font-bold"}
         >
           {"A Full-Stack Developer"}
-        </span>
+        </motion.span>
       </div>
     </div>
   );
