@@ -1,3 +1,5 @@
+import { Stack } from "../stack/stack.interfaces";
+
 export interface Projects {
   data: Project[];
   meta: Meta;
@@ -14,21 +16,12 @@ export interface Project {
     updatedAt: string;
     publishedAt: string;
     stacks: {
-      data: Stacks[];
+      data: Stack[];
     };
     postImage: PostImage;
     startdate: string;
     enddate: string | null;
     shortDescription: string;
-  };
-}
-
-export interface Stacks {
-  id: number;
-  attributes: {
-    name: string;
-    uuid: string;
-    color: string;
   };
 }
 
