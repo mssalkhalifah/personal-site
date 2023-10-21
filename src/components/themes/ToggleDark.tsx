@@ -15,20 +15,27 @@ const ToggleDark: React.FC<IToggleDark> = ({}) => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
-
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
-  return (
+  return mounted ? (
     <motion.button
       onClick={() => toggleTheme()}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.1, type: "tween" }}
       whileTap={{ scale: 0.8 }}
-      className="p-4 text-zinc-950 bg-zinc-50 transition-colors dark:text-zinc-50 dark:bg-zinc-500 rounded-xl shadow-xl"
+      className="text-zinc-950 bg-zinc-50 w-[50px] h-[50px] transition-colors dark:text-zinc-50 dark:bg-zinc-500 rounded-xl shadow-xl"
     >
-      {theme === "light" ? <MdLightMode /> : <MdDarkMode />}
+      {theme === "light" ? (
+        <MdLightMode className="mx-auto w-[25px] h-[25px]" />
+      ) : (
+        <MdDarkMode className="mx-auto w-[25px] h-[25px]" />
+      )}
     </motion.button>
+  ) : (
+    <div className="w-[50px] h-[50px] bg-zinc-300 animate-pulse rounded-xl"></div>
   );
 };
 

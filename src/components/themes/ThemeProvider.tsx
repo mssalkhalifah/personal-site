@@ -16,7 +16,7 @@ const Provider: React.FC<IThemesProvider> = ({ children }) => {
 
   if (!mounted) return <>{children}</>;
 
-  return <NextThemesProvider attribute="class">{children}</NextThemesProvider>;
+  return <NextThemesProvider attribute="class" defaultTheme="light">{children}</NextThemesProvider>;
 };
 
 export default Provider;
