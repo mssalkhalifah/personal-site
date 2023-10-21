@@ -4,10 +4,6 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        primary: ["Roboto"],
-        terminal: ["VT323"],
-      },
       colors: {
         primary: "rgb(219, 216, 227)",
         secondary: "rgb(92, 84, 112)",
