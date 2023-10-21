@@ -8,5 +8,6 @@ export interface Stack {
     name: string;
     uuid: string;
     color: string;
+    url: string;
   };
 }

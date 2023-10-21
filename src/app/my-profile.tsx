@@ -8,6 +8,8 @@ import TypeIt from "typeit";
 import { useEffect, useRef, useState } from "react";
 import { TbBrandReact, TbBrandNextjs, TbBrandNodejs } from "react-icons/tb";
 import { BiLogoPostgresql } from "react-icons/bi";
+import Link from "next/link";
+import { Stack } from "@/lib/stack/stack.interfaces";
 
 const pixelifySans = Pixelify_Sans({
   subsets: ["latin"],
@@ -15,7 +17,31 @@ const pixelifySans = Pixelify_Sans({
   display: "swap",
 });
 
-const MyProfile: React.FC = () => {
+interface IMyProfile {
+  stacks: Stack[];
+}
+
+const getStackIconByName = (name: string): JSX.Element => {
+  if (name.toLowerCase().indexOf("react") >= 0) {
+    return <TbBrandReact />;
+  }
+
+  if (name.toLowerCase().indexOf("nextjs") >= 0) {
+    return <TbBrandNextjs />;
+  }
+
+  if (name.toLowerCase().indexOf("nodejs") >= 0) {
+    return <TbBrandNodejs />;
+  }
+
+  if (name.toLowerCase().indexOf("postgresql") >= 0) {
+    return <BiLogoPostgresql />;
+  }
+
+  return <></>;
+};
+
+const MyProfile: React.FC<IMyProfile> = ({ stacks }) => {
   const canAnimate = useRef<boolean>(true);
   const [fontAnimated, setFontAnimated] = useState(false);
 
@@ -98,45 +124,30 @@ const MyProfile: React.FC = () => {
           variants={container}
           initial="hidden"
           animate="show"
-          className="flex place-items-center justify-center mt-3 text-lg font-bold space-x-4"
+          className="flex flex-wrap place-items-center justify-center mt-3 text-lg font-bold "
         >
-          <motion.li
-            variants={item}
-            className="flex place-items-center bg-zinc-50 dark:bg-zinc-800 shadow-lg rounded-xl px-3"
-          >
-            <span className="mr-1">
-              <TbBrandNextjs />
-            </span>
-            NextJS
-          </motion.li>
-          <motion.li
-            variants={item}
-            className="flex place-items-center bg-zinc-50 dark:bg-zinc-800 shadow-lg rounded-xl px-3"
-          >
-            <span className="text-green-500 mr-1">
-              <TbBrandNodejs />
-            </span>
-            NodeJS
-          </motion.li>
-
-          <motion.li
-            variants={item}
-            className="flex place-items-center bg-zinc-50 dark:bg-zinc-800 shadow-lg rounded-xl px-3"
-          >
-            <span className="text-blue-500 mr-1">
-              <TbBrandReact />
-            </span>
-            React
-          </motion.li>
-          <motion.li
-            variants={item}
-            className="flex place-items-center bg-zinc-50 dark:bg-zinc-800 shadow-lg rounded-xl px-3"
-          >
-            <span className="text-blue-700 mr-1">
-              <BiLogoPostgresql />
-            </span>
-            Postgres
-          </motion.li>
+          {stacks.map((stack, index) => (
+            <motion.li key={index} variants={item} whileHover={{ scale: 1.05 }}>
+              <Link
+                href={stack.attributes.url}
+                target="_blank"
+                className="flex place-items-center bg-zinc-50 dark:bg-zinc-800 shadow-lg rounded-xl px-3 mx-2 my-1"
+              >
+                <span
+                  className="mr-1"
+                  style={{
+                    color:
+                      stack.attributes.name.toLowerCase() === "nextjs"
+                        ? ""
+                        : stack.attributes.color,
+                  }}
+                >
+                  {getStackIconByName(stack.attributes.name)}
+                </span>
+                {stack.attributes.name}
+              </Link>
+            </motion.li>
+          ))}
         </motion.ul>
       )}
     </div>
