@@ -43,6 +43,8 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
   const isScrolling = useRef<boolean>(false);
   const touchStartY = useRef<number>(0);
   const canScroll = useRef<boolean>(true);
+  const touchThreshhold = 100;
+  const scrollThreshhold = 5;
   const [totalSections, setTotalSections] = useState(0);
   const [currentSection, setCurrentSection] = useState(0);
 
@@ -66,6 +68,20 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
 
     if (isMobile()) {
       direction = touchStartY.current - direction;
+
+      if (
+        (direction > 0 && direction <= touchThreshhold) ||
+        (direction < 0 && direction >= -touchThreshhold)
+      ) {
+        direction = 0;
+      }
+    } else {
+      if (
+        (direction > 0 && direction <= scrollThreshhold) ||
+        (direction < 0 && direction >= -scrollThreshhold)
+      ) {
+        direction = 0;
+      }
     }
 
     if (direction > 0 && nextElement) {

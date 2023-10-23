@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Stack } from "@/lib/stack/stack.interfaces";
 
 const pixelifySans = Pixelify_Sans({
-  subsets: ["latin"],
+  subsets: ["cyrillic"],
   weight: "400",
   display: "swap",
 });
