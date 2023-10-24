@@ -147,7 +147,7 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
       }
       ignore = true;
       setTimeout(() => (ignore = false), 600);
-      console.log("scroll ended");
+      // console.log("scroll ended");
       isScrolling.current = false;
     }
 
@@ -171,6 +171,12 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
       touchStartY.current = event.touches[0].clientY;
     });
 
+    document.querySelectorAll("div.ignore").forEach((divElement) =>
+      divElement.addEventListener("touchmove", (event) => {
+        event.stopPropagation();
+      }),
+    );
+
     return () => {
       document.querySelector("body")!.classList.remove("overscroll-none");
       window.removeEventListener("wheel", () => endScrolling);
@@ -188,6 +194,12 @@ const HandleScroll: React.FC<IHandleScroll> = () => {
           handleScrolling(index, sectionElements, event.touches[0].clientY);
         });
       });
+
+      document.querySelectorAll("div.ignore").forEach((divElement) =>
+        divElement.removeEventListener("touchmove", (event) => {
+          event.stopPropagation();
+        }),
+      );
     };
   }, [handleScrolling]);
 

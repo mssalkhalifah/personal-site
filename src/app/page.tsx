@@ -32,7 +32,7 @@ export default async function Page() {
               WHAT I DO
             </span>
           </h1>
-          <div className="flex space-x-5 font-black overflow-x-scroll py-8 w-full px-4 md:justify-center">
+          <div className="ignore flex space-x-5 font-black overflow-x-auto touch-auto overscroll-auto py-8 w-full px-4 md:justify-center">
             <WhatIDoFrontEnd />
             <WhatIDoBackend />
             <WhatIDoDatabase />
