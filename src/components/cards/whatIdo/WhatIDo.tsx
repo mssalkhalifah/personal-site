@@ -155,20 +155,7 @@ export const WhatIDoBackend: React.FC = () => {
             <span className="absolute w-8 h-2 bg-yellow-500 rounded-full right-2 top-28"></span>
 
             <FaCloud className="absolute w-24 h-24 top-9 left-2 text-zinc-700 dark:text-zinc-900" />
-            <motion.span
-              className="absolute top-[84px] left-8 text-zinc-600 dark:text-zinc-700"
-              whileInView={{
-                rotate: 360,
-                transition: {
-                  duration: 2.5,
-                  repeat: Infinity,
-                  type: "tween",
-                  ease: [],
-                },
-              }}
-            >
-              <FaGear className="w-12 h-12" />
-            </motion.span>
+            <FaGear className="w-12 h-12 absolute animate-spin-slow top-[84px] left-8 text-zinc-600 dark:text-zinc-700" />
           </div>
         </motion.div>
       </div>

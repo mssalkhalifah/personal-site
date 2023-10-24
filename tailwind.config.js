@@ -21,6 +21,7 @@ module.exports = {
       },
       animation: {
         fadeInUp: "fadeInUp 300ms",
+        "spin-slow": "spin 2s linear infinite",
       },
       screens: {
         xs: "411px",
