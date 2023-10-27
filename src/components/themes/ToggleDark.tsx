@@ -26,6 +26,7 @@ const ToggleDark: React.FC<IToggleDark> = ({}) => {
       animate={{ opacity: 1 }}
       transition={{ delay: 0.1, type: "tween" }}
       whileTap={{ scale: 0.8 }}
+      title="ToggleDark"
       className="text-zinc-950 bg-zinc-50 w-[50px] h-[50px] transition-colors dark:text-zinc-50 dark:bg-zinc-500 rounded-xl shadow-xl"
     >
       {theme === "light" ? (

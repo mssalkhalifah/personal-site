@@ -27,7 +27,7 @@ const HorizontalCard: React.FC<HorizontalCard> = ({
   projectUrl,
 }) => {
   return (
-    <div className="shadow-lg p-2 dark:bg-zinc-900 rounded-xl transition-all hover:sm:scale-105 pointer-events-none">
+    <div className="shadow-md p-2 dark:shadow-zinc-900 dark:bg-zinc-900 rounded-xl transition-all hover:sm:scale-105 pointer-events-none">
       <Link
         className="flex max-w-3xl flex-col sm:pointer-events-auto sm:flex-row"
         href={projectUrl}
