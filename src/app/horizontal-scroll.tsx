@@ -1,10 +1,5 @@
 "use client";
 
-import {
-  WhatIDoBackend,
-  WhatIDoDatabase,
-  WhatIDoFrontEnd,
-} from "@/components/cards/whatIdo/WhatIDo";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 

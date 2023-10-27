@@ -22,7 +22,7 @@ const SmallCard: React.FC<ISmallCard> = ({ postImage, stacks, url = "" }) => {
         className="relative h-52 rounded-xl w-52 overflow-hidden hover:outline hover:outline-blue-500 hover:outline-4"
       >
         <Image
-          className="absolute h-52 hover:scale-105 transition-transform"
+          className="absolute h-full w-full hover:scale-105 transition-transform"
           src={image.imageUrl}
           alt={image.alternative}
           width={208}
