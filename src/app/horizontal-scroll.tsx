@@ -33,6 +33,9 @@ const HorizontalDiv: React.FC<IHorizontalDiv> = ({ children }) => {
       className="overflow-hidden py-5 w-screen lg:w-fit lg:mx-auto"
     >
       <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, type: "tween" }}
         drag={canScroll && "x"}
         dragConstraints={contentRef}
         className="flex space-x-4 px-5 w-fit"

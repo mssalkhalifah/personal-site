@@ -29,28 +29,28 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
 
   return (
     <div className="flex h-8 w-full dark:bg-zinc-800 rounded-full shadow-md">
-      <AnimatePresence>
-        <div
-          ref={dropdownRef}
-          onClick={() => setDropdownClick(!dropdownClicked)}
-          className={`relative flex justify-between items-center w-24 px-2 dark:bg-zinc-800 rounded-l-full cursor-pointer transition-colors space-x-1 border-2 ${
-            dropdownClicked
-              ? "border-blue-500"
-              : "border-white dark:border-zinc-800"
+      <div
+        ref={dropdownRef}
+        onClick={() => setDropdownClick(!dropdownClicked)}
+        className={`relative flex justify-between items-center w-24 px-2 dark:bg-zinc-800 rounded-l-full cursor-pointer transition-colors space-x-1 border-2 ${
+          dropdownClicked
+            ? "border-blue-500"
+            : "border-white dark:border-zinc-800"
+        }`}
+      >
+        <span
+          className={`pointer-events-none select-none font-black transition-opacity ${
+            selectedTags.length > 0 ? "opacity-0" : "opacity-100"
           }`}
         >
-          <span
-            className={`pointer-events-none select-none font-black transition-opacity ${
-              selectedTags.length > 0 ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            ALL
-          </span>
-          <BiSolidUpArrow
-            className={`transition-transform ${
-              dropdownClicked ? "rotate-180" : "rotate-0"
-            }`}
-          />
+          ALL
+        </span>
+        <BiSolidUpArrow
+          className={`transition-transform ${
+            dropdownClicked ? "rotate-180" : "rotate-0"
+          }`}
+        />
+        <AnimatePresence>
           {dropdownClicked && (
             <motion.div
               initial={{ opacity: 0, y: -10, scale: 0.2 }}
@@ -79,14 +79,16 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
                 })}
             </motion.div>
           )}
-        </div>
-        <div
-          className={`flex w-full items-center rounded-r-full overflow-hidden border-2 transition-colors ${
-            isInputFocused
-              ? "border-blue-500"
-              : "border-white dark:border-zinc-800"
-          }`}
-        >
+        </AnimatePresence>
+      </div>
+      <div
+        className={`flex w-full items-center rounded-r-full overflow-hidden border-2 transition-colors ${
+          isInputFocused
+            ? "border-blue-500"
+            : "border-white dark:border-zinc-800"
+        }`}
+      >
+        <AnimatePresence>
           {selectedTags.map((tag) => {
             return (
               <motion.div
@@ -127,8 +129,8 @@ const SearchBar: React.FC<SearchBar> = ({ tags, onSearch, onTagSelect }) => {
             onFocus={() => setInputFocused(true)}
             onBlur={() => setInputFocused(false)}
           />
-        </div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
     </div>
   );
 };

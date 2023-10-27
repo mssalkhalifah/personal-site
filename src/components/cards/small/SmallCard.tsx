@@ -1,4 +1,3 @@
-import Tag from "@/components/tags/tag/Tag";
 import Stack from "@/components/tags/tag/stack";
 import { PostImage } from "@/lib/project/project.interfaces";
 import { Stacks } from "@/lib/stack/stack.interfaces";

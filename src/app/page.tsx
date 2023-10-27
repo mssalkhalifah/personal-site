@@ -55,7 +55,7 @@ export default async function Page() {
                   key={project.id}
                   postImage={project.attributes.postImage}
                   stacks={project.attributes.stacks}
-                  url={"projects/" + project.attributes.slug}
+                  url={"/projects/" + project.attributes.slug}
                 />
               );
             })}
