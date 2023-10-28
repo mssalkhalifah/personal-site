@@ -11,7 +11,23 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portfolio.alkhalifah.dev"),
+  alternates: {
+    canonical: "/",
+  },
   themeColor: "#ffffff",
+  title: "Mssalkhalifah | Full-Stack Developer",
+  description:
+    "Passionate full-stack developer crafting seamless web experiences. Expertise in front-end, back-end, and databases. Let's build something amazing together! 💻🚀",
+  openGraph: {
+    title: "Mssalkhalifah | Full-Stack Developer",
+    description:
+      "Passionate full-stack developer crafting seamless web experiences. Expertise in front-end, back-end, and databases. Let's build something amazing together! 💻🚀",
+    images: "/website_image.jpg",
+    url: "/",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({
