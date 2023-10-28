@@ -17,6 +17,7 @@ export default class StackController {
 
     stacks = await fetch(`${process.env.strapi_url}stacks`, {
       headers: StackController.apiHeader,
+      next: { tags: ["stacks"] },
     })
       .then((res) => res.json())
       .catch((error: TypeError) => {
@@ -43,6 +44,7 @@ export default class StackController {
         `${process.env.strapi_url}stacks?filters[name][$eqi]=${name}`,
         {
           headers: StackController.apiHeader,
+          next: { tags: ["stacks"] },
         },
       ).then((res) => res.json());
 
