@@ -1,4 +1,6 @@
 import { NextRequest } from "next/server";
+import logger from "@/logger";
+import { Logger } from "pino";
 
 export interface IApiResponse {
   message?: string;
@@ -8,15 +10,17 @@ export interface IApiResponse {
 
 export function apiHandler(
   request: NextRequest,
-  func: () => IApiResponse,
+  func: (logger: Logger) => IApiResponse,
 ): Response {
   var response: IApiResponse = {
     message: HttpStatus[HttpStatus.InternalServerError],
     status: HttpStatus.InternalServerError,
   };
 
+  const prefix = `${request.method} ${request.nextUrl.pathname}`;
+
   try {
-    const result = func();
+    const result = func(logger);
 
     response.status = result.status;
     response.data = result.data;
@@ -24,18 +28,16 @@ export function apiHandler(
       result.message ? ": " + result.message : ""
     }`;
 
-    console.log(response);
+    logger.info(`${prefix} ${response.message} (${response.status})`);
 
     return Response.json(response, { status: response.status });
   } catch (error) {
-    console.log(error);
+    logger.error(`${prefix} ${response.message} ${error} (${response.status})`);
     return Response.json(response, { status: response.status });
   }
 }
 
-export function errorHandler() {
-
-}
+export function errorHandler() {}
 
 export enum HttpStatus {
   // Informational

@@ -1,3 +1,4 @@
+import logger from "@/logger";
 import { Project, Projects } from "./project.interfaces";
 
 export default class ProjectController {
@@ -8,7 +9,7 @@ export default class ProjectController {
 
   static async getAllProjects(): Promise<Projects> {
     if (!process.env.strapi_url) {
-      console.error("getAllProjects: strapi_url is undefined");
+      logger.error(`${this.name} strapi_url is undefined`);
       return this.setDefaultValues(null);
     }
 
@@ -21,7 +22,7 @@ export default class ProjectController {
     )
       .then((res) => res.json())
       .catch((error: TypeError) => {
-        console.log("getAllProjects: \n\t" + error.cause);
+        logger.error(`${this.name} ${error.cause}`);
         return [];
       });
 

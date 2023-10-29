@@ -1,3 +1,4 @@
+import logger from "@/logger";
 import { Stack, Stacks } from "./stack.interfaces";
 
 export default class StackController {
@@ -15,7 +16,8 @@ export default class StackController {
       return stacks;
     }
 
-    stacks = await fetch(`${process.env.strapi_url}stacks`, {
+    const query = `${process.env.strapi_url}stacks`;
+    stacks = await fetch(query, {
       headers: StackController.apiHeader,
       next: { tags: ["stacks"] },
     })
@@ -24,6 +26,12 @@ export default class StackController {
         console.log("getAllStacks: \n\t" + error.message);
         return { data: [] };
       });
+
+    logger.info(
+      `${query} ${this.name}.${this.getAllStacks.name} ${JSON.stringify(
+        stacks,
+      )}`,
+    );
 
     return stacks;
   }
@@ -39,16 +47,21 @@ export default class StackController {
       },
     };
 
+    const query = `${process.env.strapi_url}stacks?filters[name][$eqi]=${name}`;
+
     try {
-      const response: Stacks = await fetch(
-        `${process.env.strapi_url}stacks?filters[name][$eqi]=${name}`,
-        {
-          headers: StackController.apiHeader,
-          next: { tags: ["stacks"] },
-        },
-      ).then((res) => res.json());
+      const response: Stacks = await fetch(query, {
+        headers: StackController.apiHeader,
+        next: { tags: ["stacks"] },
+      }).then((res) => res.json());
 
       if (response && response.data) stack = response.data[0];
+
+      logger.info(
+        `${query} ${this.name}.${this.getStackByName.name} ${JSON.stringify(
+          stack,
+        )}`,
+      );
 
       return stack;
     } catch (error) {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IApiResponse } from "./utils/api";
+import logger from "@/logger";
 
 export const config = {
   matcher: "/api/:function*",
@@ -9,6 +10,8 @@ export function middleware(request: NextRequest) {
   const response: IApiResponse = {
     status: 500,
   };
+
+  const message = `${request.method} ${request.nextUrl.pathname}`;
 
   try {
     if (request.nextUrl.pathname.indexOf("revalidate") >= 0) {
@@ -20,12 +23,14 @@ export function middleware(request: NextRequest) {
         if (!token) {
           response.status = 400;
           response.message = "Must provide a token";
+          logger.error(response, message);
           return Response.json(response, { status: response.status });
         }
 
         if (token !== process.env.ON_DEMAND_REVALIDATION_TOKEN) {
           response.status = 401;
           response.message = "Invalid token";
+          logger.error(response, message);
           return Response.json(response, { status: response.status });
         }
 
@@ -33,11 +38,13 @@ export function middleware(request: NextRequest) {
       } else {
         response.status = 400;
         response.message = "Invalid header: Bearer <Token>";
+        logger.error(response, message);
         return Response.json(response, { status: response.status });
       }
     }
   } catch (error) {
-    console.log(error);
+    response.data = error;
+    logger.error(response, message);
     return Response.json(response, { status: response.status });
   }
 }
